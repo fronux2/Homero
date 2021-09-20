@@ -9,13 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static modelo.Conexion.getConexion;
+
 
 /**
  *
  * @author marku
  */
-public class LoginMVC {
+public class LoginMVC extends ConexionBD{
     public boolean login(Login l){
         PreparedStatement ps = null;
         ResultSet rs = null;

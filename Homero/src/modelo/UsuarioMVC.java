@@ -11,13 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
-import static modelo.Conexion.getConexion;
+
 
 /**
  *
  * @author marku
  */
-public class UsuarioMVC {
+public class UsuarioMVC extends ConexionBD{
     
     public boolean registrar(Usuario us){
         PreparedStatement ps = null;
