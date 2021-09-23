@@ -40,3 +40,4 @@ public class Login {
         private int id_tipo_usuario;
         
 }
+

@@ -20,7 +20,7 @@ public class LoginMVC extends ConexionBD{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "select * from login where usuario = ? and contrasena = ?";
+        String sql = "select * from usuario where usuario = ? and contrasena = ?";
         
         
         try {
