@@ -25,7 +25,7 @@ public class Homero {
         VistaServicio vser = new VistaServicio();
         
         
-        CtrlLogin ctrl = new CtrlLogin(l, lmvc, vl, vin, vus, vsisapp);
+        CtrlLogin ctrl = new CtrlLogin(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser);
         ctrl.iniciar();
     }
     

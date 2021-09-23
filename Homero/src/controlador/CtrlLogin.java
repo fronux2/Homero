@@ -31,19 +31,28 @@ public class CtrlLogin implements ActionListener{
     private VistaIndex vin;
     private VistaUsuario vus;
     private VistaSisApli vsisapp;
+    private VistaSisBD vsisbd;
+    private VistaServicio vser;
     
     
-      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp){
+      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser){
         this.l = l;
         this.lmvc = lmvc;
         this.vl = vl;       
         this.vin = vin;
         this.vus = vus;
         this.vsisapp = vsisapp;
+        this.vsisbd = vsisbd;
+        this.vser = vser;   
         this.vin.btnUsuarios.addActionListener(this);
+        this.vin.btnSisApp.addActionListener(this);
+        this.vin.btnSisBD.addActionListener(this);
+        this.vin.btnServicio.addActionListener(this);
         this.vl.btnAceptar.addActionListener(this);        
         this.vus.btnVolver.addActionListener(this);
         this.vsisapp.btnVolver.addActionListener(this);
+        this.vsisbd.btnVolver2.addActionListener(this);
+        this.vser.btnVolver.addActionListener(this);
        
         
 }
@@ -79,6 +88,30 @@ public class CtrlLogin implements ActionListener{
                 vus.setVisible(true);  
         }
         
+        if(e.getSource() == vin.btnSisApp){
+                vin.setVisible(false);
+                vsisapp.setTitle("Vista Sistema Aplicaciones");
+                vsisapp.setLocationRelativeTo(null);  
+                vsisapp.setVisible(true);  
+        }
+        
+        if(e.getSource() == vin.btnSisBD){
+                vin.setVisible(false);
+                vsisbd.setTitle("Vista Sistema Base de Datos");
+                vsisbd.setLocationRelativeTo(null);  
+                vsisbd.setVisible(true);  
+        }
+        if(e.getSource() == vin.btnServicio){
+                vin.setVisible(false);
+                vsisbd.setTitle("Vista Sistema Base de Datos");
+                vsisbd.setLocationRelativeTo(null);  
+                vsisbd.setVisible(true);  
+        }
+        
+        
+        
+        
+        
         
          
         //Acciones Vista Usuario
@@ -88,9 +121,14 @@ public class CtrlLogin implements ActionListener{
         }
         //Acciones Vista Sistema Aplicaciones sisapp
         if(e.getSource() == vsisapp.btnVolver){
-                vus.setVisible(false);
+                vsisapp.setVisible(false);
                 volver();  
         }   
+        
+        if(e.getSource() == vsisbd.btnVolver2){
+                vsisbd.setVisible(false);
+                volver();  
+        }  
         
         //Acciones Vista Login
         if(e.getSource() == vl.btnAceptar){

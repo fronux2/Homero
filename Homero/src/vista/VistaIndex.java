@@ -55,6 +55,11 @@ public class VistaIndex extends javax.swing.JFrame {
 
         btnServicio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnServicio.setText("Modulo Servicio");
+        btnServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServicioActionPerformed(evt);
+            }
+        });
         jMenu1.add(btnServicio);
 
         btnSisApp.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -97,6 +102,10 @@ public class VistaIndex extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
+    private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -133,9 +142,9 @@ public class VistaIndex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem btnServicio;
+    public javax.swing.JMenuItem btnServicio;
     public javax.swing.JMenuItem btnSisApp;
-    private javax.swing.JMenuItem btnSisBD;
+    public javax.swing.JMenuItem btnSisBD;
     public javax.swing.JMenuItem btnUsuarios;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JMenu jMenu1;
