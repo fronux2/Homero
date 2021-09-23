@@ -6,7 +6,9 @@ import modelo.LoginMVC;
 import vista.VistaIndex;
 import vista.VistaLogin;
 import vista.VistaSala;
-import vista.VistaServidor;
+import vista.VistaServicio;
+import vista.VistaSisApli;
+import vista.VistaSisBD;
 import vista.VistaUsuario;
 
 public class Homero {
@@ -15,15 +17,15 @@ public class Homero {
         Login l = new Login();
         LoginMVC lmvc = new LoginMVC();
         VistaLogin vl = new VistaLogin();
-        VistaSala vsal = new VistaSala();
-        VistaServidor vser = new VistaServidor();
+        VistaSala vsal = new VistaSala();        
         VistaIndex vin = new VistaIndex();
         VistaUsuario vus = new VistaUsuario();
+        VistaSisApli vsisapp = new VistaSisApli();
+        VistaSisBD vsisbd = new VistaSisBD();
+        VistaServicio vser = new VistaServicio();
         
         
-        
-        
-        CtrlLogin ctrl = new CtrlLogin(l, lmvc, vl, vsal, vser, vin, vus);
+        CtrlLogin ctrl = new CtrlLogin(l, lmvc, vl, vin, vus, vsisapp);
         ctrl.iniciar();
     }
     

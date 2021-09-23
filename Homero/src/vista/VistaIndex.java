@@ -31,9 +31,9 @@ public class VistaIndex extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnUsuarios = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        btnServicio = new javax.swing.JMenuItem();
+        btnSisApp = new javax.swing.JMenuItem();
+        btnSisBD = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,19 +46,24 @@ public class VistaIndex extends javax.swing.JFrame {
 
         btnUsuarios.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnUsuarios.setText("Modulo Usuarios");
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
         jMenu1.add(btnUsuarios);
 
-        jMenuItem1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem1.setText("Modulo Servicio");
-        jMenu1.add(jMenuItem1);
+        btnServicio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnServicio.setText("Modulo Servicio");
+        jMenu1.add(btnServicio);
 
-        jMenuItem4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem4.setText("Modulo Sistema Aplicacion");
-        jMenu1.add(jMenuItem4);
+        btnSisApp.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnSisApp.setText("Modulo Sistema Aplicacion");
+        jMenu1.add(btnSisApp);
 
-        jMenuItem5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem5.setText("Modulo Sistema Base de Datos");
-        jMenu1.add(jMenuItem5);
+        btnSisBD.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnSisBD.setText("Modulo Sistema Base de Datos");
+        jMenu1.add(btnSisBD);
 
         jMenuBar1.add(jMenu1);
 
@@ -87,6 +92,10 @@ public class VistaIndex extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,13 +133,13 @@ public class VistaIndex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnServicio;
+    public javax.swing.JMenuItem btnSisApp;
+    private javax.swing.JMenuItem btnSisBD;
     public javax.swing.JMenuItem btnUsuarios;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }

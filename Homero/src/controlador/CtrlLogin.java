@@ -12,8 +12,9 @@ import modelo.Login;
 import modelo.LoginMVC;
 import vista.VistaIndex;
 import vista.VistaLogin;
-import vista.VistaSala;
-import vista.VistaServidor;
+import vista.VistaServicio;
+import vista.VistaSisApli;
+import vista.VistaSisBD;
 import vista.VistaUsuario;
 
 /**
@@ -26,25 +27,25 @@ public class CtrlLogin implements ActionListener{
     
     private Login l;
     private LoginMVC lmvc;
-    private VistaLogin vl;
-    private VistaSala vsal;
-    private VistaServidor vser;
+    private VistaLogin vl;    
     private VistaIndex vin;
     private VistaUsuario vus;
+    private VistaSisApli vsisapp;
     
-      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaSala vsal, VistaServidor vser, VistaIndex vin, VistaUsuario vus){
+    
+      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp){
         this.l = l;
         this.lmvc = lmvc;
-        this.vl = vl;
-        this.vsal = vsal;
-        this.vser = vser;
+        this.vl = vl;       
         this.vin = vin;
         this.vus = vus;
+        this.vsisapp = vsisapp;
         this.vin.btnUsuarios.addActionListener(this);
         this.vl.btnAceptar.addActionListener(this);        
         this.vus.btnVolver.addActionListener(this);
-        this.vser.btnVolver.addActionListener(this);
-        this.vsal.btnVolver.addActionListener(this);
+        this.vsisapp.btnVolver.addActionListener(this);
+       
+        
 }
     
     public void iniciar()
@@ -77,22 +78,19 @@ public class CtrlLogin implements ActionListener{
                 vus.setLocationRelativeTo(null);  
                 vus.setVisible(true);  
         }
+        
+        
          
         //Acciones Vista Usuario
         if(e.getSource() == vus.btnVolver){
                 vus.setVisible(false);
                 volver();  
         }
-        //Acciones Vista Servidor
-        if(e.getSource() == vser.btnVolver){
-                vser.setVisible(false);
-                volver(); 
-        }
-        //Acciones Vista Sala
-        if(e.getSource() == vsal.btnVolver){
-                vsal.setVisible(false);
-                volver(); 
-        }
+        //Acciones Vista Sistema Aplicaciones sisapp
+        if(e.getSource() == vsisapp.btnVolver){
+                vus.setVisible(false);
+                volver();  
+        }   
         
         //Acciones Vista Login
         if(e.getSource() == vl.btnAceptar){
