@@ -2,13 +2,19 @@ package modelo;
 
 public class Usuario {
 
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
+    //    private int id_usuario;
+    private String rut_us;
+    private String dv_us;
+    private String nombre_us;
+    private String apaterno_us;
+    private String amaterno_us;
+    private String fnaciemiento_us;
+    private String telefono_us;
+    private String email_us;
+    private String direccion;
+    private String usuario;
+    private String contrasena;
+    private int perfil_id;
 
     public String getRut_us() {
         return rut_us;
@@ -81,16 +87,31 @@ public class Usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    private int id_usuario;
-    private String rut_us;
-    private String dv_us;
-    private String nombre_us;
-    private String apaterno_us;
-    private String amaterno_us;
-    private String fnaciemiento_us;
-    private String telefono_us;
-    private String email_us;
-    private String direccion;
-          
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public int getPerfil_id() {
+        return perfil_id;
+    }
+
+    public void setPerfil_id(int perfil_id) {
+        this.perfil_id = perfil_id;
+    }
+    
+    
     
 }

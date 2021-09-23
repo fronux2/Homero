@@ -41,9 +41,7 @@ public class CtrlLogin implements ActionListener{
         this.vin = vin;
         this.vus = vus;
         this.vin.btnUsuarios.addActionListener(this);
-        this.vl.btnAceptar.addActionListener(this);
-        this.vin.btnServidor.addActionListener(this);
-        this.vin.btnSala.addActionListener(this);
+        this.vl.btnAceptar.addActionListener(this);        
         this.vus.btnVolver.addActionListener(this);
         this.vser.btnVolver.addActionListener(this);
         this.vsal.btnVolver.addActionListener(this);
@@ -72,24 +70,14 @@ public class CtrlLogin implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         //Acciones Vista Index
-        if(e.getSource() == vin.btnServidor){
-                vin.setVisible(false);
-                vser.setTitle("Vista Servidor");
-                vser.setLocationRelativeTo(null);  
-                vser.setVisible(true);  
-        }
+        
         if(e.getSource() == vin.btnUsuarios){
                 vin.setVisible(false);
                 vus.setTitle("Vista Usuario");
                 vus.setLocationRelativeTo(null);  
                 vus.setVisible(true);  
         }
-        if(e.getSource() == vin.btnSala){
-                vin.setVisible(false);
-                vsal.setTitle("Vista Sala");
-                vsal.setLocationRelativeTo(null);  
-                vsal.setVisible(true);  
-        }        
+         
         //Acciones Vista Usuario
         if(e.getSource() == vus.btnVolver){
                 vus.setVisible(false);

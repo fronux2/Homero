@@ -31,12 +31,7 @@ public class VistaIndex extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnUsuarios = new javax.swing.JMenuItem();
-        btnServidor = new javax.swing.JMenuItem();
-        btnSala = new javax.swing.JMenuItem();
-        btnRack = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -53,29 +48,9 @@ public class VistaIndex extends javax.swing.JFrame {
         btnUsuarios.setText("Modulo Usuarios");
         jMenu1.add(btnUsuarios);
 
-        btnServidor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnServidor.setText("Modulo Servidor");
-        jMenu1.add(btnServidor);
-
-        btnSala.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnSala.setText("Modulo Sala");
-        jMenu1.add(btnSala);
-
-        btnRack.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnRack.setText("Modulo Rack");
-        jMenu1.add(btnRack);
-
         jMenuItem1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuItem1.setText("Modulo Servicio");
         jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem2.setText("Modulo Encargado");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem3.setText("Modulo Incidentes");
-        jMenu1.add(jMenuItem3);
 
         jMenuItem4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuItem4.setText("Modulo Sistema Aplicacion");
@@ -149,17 +124,12 @@ public class VistaIndex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JMenuItem btnRack;
-    public javax.swing.JMenuItem btnSala;
-    public javax.swing.JMenuItem btnServidor;
     public javax.swing.JMenuItem btnUsuarios;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables

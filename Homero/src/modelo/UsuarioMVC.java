@@ -22,20 +22,22 @@ public class UsuarioMVC extends ConexionBD{
     public boolean registrar(Usuario us){
         PreparedStatement ps = null;
         Connection con = getConexion();        
-        String sql = "INSERT INTO USUARIO (id_usuario, rut_us, dv_us, nombre_us, apaterno_us, amaterno_us, fnacimiento_us, telefono_us, email_us, direccion) "
-                + "VALUES(SEQUENCE_ID.NEXTVAL,?,?,?,?)";        
+        String sql = "INSERT INTO USUARIO VALUES(id_usuario_seq.nextval,?,?,?,?,?,to_date('?','dd/mm/yyyy'),?,?,?,?,?,?)";    
         
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, us.getRut_us());
             ps.setString(2, us.getDv_us());
-            ps.setString(2, us.getNombre_us());
-            ps.setString(2, us.getApaterno_us());
-            ps.setString(2, us.getAmaterno_us());
-            ps.setString(2, us.getFnaciemiento_us());
-            ps.setString(2, us.getTelefono_us());
-            ps.setString(2, us.getEmail_us());
-            ps.setString(2, us.getDireccion());
+            ps.setString(3, us.getNombre_us());
+            ps.setString(4, us.getApaterno_us());
+            ps.setString(5, us.getAmaterno_us());
+            ps.setString(6, us.getFnaciemiento_us());
+            ps.setString(7, us.getTelefono_us());
+            ps.setString(8, us.getEmail_us());
+            ps.setString(9, us.getDireccion());
+            ps.setString(10, us.getUsuario());
+            ps.setString(11, us.getContrasena());
+            ps.setInt(12, us.getPerfil_id());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -49,35 +51,6 @@ public class UsuarioMVC extends ConexionBD{
             }
         }   
     }    
-    
-    public boolean modificar(Usuario us){
-        PreparedStatement ps = null;
-        Connection con = getConexion();        
-        String sql = "UPDATE usuario SET rut_us=? , dv_us=?, nombre_us=?, apaterno_us=?, amaterno_us=?, fnacimiento_us=?, telefono_us=?, email_us=?, direccion WHERE rut_us=? ";
-        
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, us.getRut_us());
-            ps.setString(2, us.getDv_us());
-            ps.setString(3, us.getNombre_us());
-            ps.setString(4, us.getApaterno_us());
-            ps.setString(5, us.getAmaterno_us());
-            ps.setString(5, us.getFnaciemiento_us());
-            ps.execute();
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        
-        }
-    
-    }
     
     public boolean eliminar(Usuario us){
         PreparedStatement ps = null;
