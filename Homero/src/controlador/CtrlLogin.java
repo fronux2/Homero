@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import modelo.Login;
 import modelo.LoginMVC;
+import modelo.Usuario;
+import modelo.UsuarioMVC;
 import vista.VistaIndex;
 import vista.VistaLogin;
 import vista.VistaServicio;
@@ -33,9 +35,11 @@ public class CtrlLogin implements ActionListener{
     private VistaSisApli vsisapp;
     private VistaSisBD vsisbd;
     private VistaServicio vser;
+    private UsuarioMVC usmvc;
+    private Usuario us;
     
     
-      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser){
+      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser, Usuario us, UsuarioMVC usmvc){
         this.l = l;
         this.lmvc = lmvc;
         this.vl = vl;       
@@ -44,6 +48,8 @@ public class CtrlLogin implements ActionListener{
         this.vsisapp = vsisapp;
         this.vsisbd = vsisbd;
         this.vser = vser;   
+        this.us = us;
+        this.usmvc = usmvc;
         this.vin.btnUsuarios.addActionListener(this);
         this.vin.btnSisApp.addActionListener(this);
         this.vin.btnSisBD.addActionListener(this);
@@ -53,6 +59,7 @@ public class CtrlLogin implements ActionListener{
         this.vsisapp.btnVolver.addActionListener(this);
         this.vsisbd.btnVolver2.addActionListener(this);
         this.vser.btnVolver.addActionListener(this);
+        this.vus.btnGuardar.addActionListener(this);
        
         
 }
@@ -69,6 +76,21 @@ public class CtrlLogin implements ActionListener{
         vin.setLocationRelativeTo(null);  
         vin.setVisible(true);  
     }   
+    
+     public void limpiarUsuario(){
+        vus.txtRut.setText(null);        
+        vus.txtNombre.setText(null);
+        vus.txtApaterno.setText(null);
+        vus.txtAmaterno.setText(null);
+        vus.txtFnacimiento.setText(null);
+        vus.txtTelefono.setText(null);
+        vus.txtEmail.setText(null);
+        vus.txtDireccion.setText(null);
+        vus.txtUsuario.setText(null);
+        vus.txtContrasena.setText(null);
+        vus.txtIdPerfil.setText(null);
+        
+    }
     
     /*public void iniciarb()
     {       
@@ -141,6 +163,33 @@ public class CtrlLogin implements ActionListener{
                 vin.setLocationRelativeTo(null);  
                 vin.setVisible(true);            
             }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+        }
+        
+        //Vista Gestion Usuarios
+        if(e.getSource() == vus.btnGuardar){            
+            us.setRut_us(vus.txtRut.getText());
+            us.setDv_us(vus.txtDv.getText());
+            us.setNombre_us(vus.txtNombre.getText());
+            us.setApaterno_us(vus.txtApaterno.getText());
+            us.setAmaterno_us(vus.txtAmaterno.getText());
+            us.setFnaciemiento_us(vus.txtFnacimiento.getText());
+            us.setTelefono_us(vus.txtTelefono.getText());
+            us.setEmail_us(vus.txtEmail.getText());
+            us.setDireccion(vus.txtDireccion.getText());
+            us.setUsuario(vus.txtUsuario.getText());
+            us.setContrasena(vus.txtContrasena.getText());
+            us.setPerfil_id(Integer.parseInt(vus.txtIdPerfil.getText()));           
+                    
+            
+            if(usmvc.registrar(us))
+            {
+                JOptionPane.showMessageDialog(null, "Registro Guardado");
+                limpiarUsuario();
+            } else 
+            {
+                JOptionPane.showMessageDialog(null, "Error al guardar");
+                //limpiarUsuario();
+            }          
         }
         
     }

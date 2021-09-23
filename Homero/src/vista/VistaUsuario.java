@@ -48,7 +48,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         txtContrasena = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtIdPerfil = new javax.swing.JTextField();
@@ -112,8 +112,8 @@ public class VistaUsuario extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton2.setText("Modificar");
 
-        jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jButton3.setText("Guardar");
+        btnGuardar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnGuardar.setText("Guardar");
 
         txtContrasena.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
@@ -140,7 +140,7 @@ public class VistaUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(82, 82, 82)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,7 +242,7 @@ public class VistaUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtFnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -286,10 +286,10 @@ public class VistaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -306,7 +306,7 @@ public class VistaUsuario extends javax.swing.JFrame {
     public javax.swing.JTextField txtApaterno;
     public javax.swing.JTextField txtContrasena;
     public javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDv;
+    public javax.swing.JTextField txtDv;
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtFnacimiento;
     public javax.swing.JTextField txtIdPerfil;

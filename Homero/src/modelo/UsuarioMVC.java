@@ -22,7 +22,7 @@ public class UsuarioMVC extends ConexionBD{
     public boolean registrar(Usuario us){
         PreparedStatement ps = null;
         Connection con = getConexion();        
-        String sql = "INSERT INTO USUARIO VALUES(id_usuario_seq.nextval,?,?,?,?,?,to_date('?','dd/mm/yyyy'),?,?,?,?,?,?)";    
+        String sql = "INSERT INTO USUARIO VALUES(id_usuario_seq.nextval,?,?,?,?,?,to_date(?,'dd/mm/yyyy'),?,?,?,?,?,?)";    
         
         try {
             ps = con.prepareStatement(sql);
