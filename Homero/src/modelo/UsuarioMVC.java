@@ -117,15 +117,25 @@ public class UsuarioMVC extends ConexionBD{
         Connection con = getConexion();
         
         try {            
+            //PreparedStatement ps = con.prepareCall(sql);
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()){                
+                
                 us = new Usuario();
-                us.setRut_us(rs.getString(1));
-                us.setDv_us(rs.getString(2));
-                us.setNombre_us(rs.getString(3));
-                us.setApaterno_us(rs.getString(4));
-                us.setAmaterno_us(rs.getString(5));
+                us.setId_usuario(rs.getInt(1));
+                us.setRut_us(rs.getString(2));
+                us.setDv_us(rs.getString(3));
+                us.setNombre_us(rs.getString(4));
+                us.setApaterno_us(rs.getString(5));
+                us.setAmaterno_us(rs.getString(6));
+                us.setFnaciemiento_us(rs.getString(7));
+                us.setTelefono_us(rs.getString(8));
+                us.setEmail_us(rs.getString(9));
+                us.setDireccion(rs.getString(10));
+                us.setUsuario(rs.getString(11));
+                us.setContrasena(rs.getString(12));
+                us.setPerfil_id(rs.getInt(13));
                 listaProducto.add(us);
             }
         } catch (Exception e) {
