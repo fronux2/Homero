@@ -1,11 +1,12 @@
 package homero;
 
-import controlador.CtrlLogin;
+import controlador.CtrlHomero;
 import modelo.Login;
 import modelo.LoginMVC;
 import modelo.Usuario;
 import modelo.UsuarioMVC;
 import vista.VistaIndex;
+import vista.VistaListaUsuarios;
 import vista.VistaLogin;
 import vista.VistaSala;
 import vista.VistaServicio;
@@ -26,10 +27,11 @@ public class Homero {
         VistaServicio vser = new VistaServicio();
         Usuario us = new Usuario();
         UsuarioMVC usmvc = new UsuarioMVC();
+        VistaListaUsuarios vlus = new VistaListaUsuarios();
         
         
         
-        CtrlLogin ctrl = new CtrlLogin(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc);
+        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus);
         ctrl.iniciar();
     }
     

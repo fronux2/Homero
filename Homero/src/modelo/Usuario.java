@@ -2,7 +2,9 @@ package modelo;
 
 public class Usuario {
 
-    //    private int id_usuario;
+    
+
+    private int id_usuario;
     private String rut_us;
     private String dv_us;
     private String nombre_us;
@@ -15,6 +17,14 @@ public class Usuario {
     private String usuario;
     private String contrasena;
     private int perfil_id;
+    
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 
     public String getRut_us() {
         return rut_us;

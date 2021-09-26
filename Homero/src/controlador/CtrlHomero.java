@@ -1,29 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import modelo.Login;
 import modelo.LoginMVC;
 import modelo.Usuario;
 import modelo.UsuarioMVC;
 import vista.VistaIndex;
+import vista.VistaListaUsuarios;
 import vista.VistaLogin;
 import vista.VistaServicio;
 import vista.VistaSisApli;
 import vista.VistaSisBD;
 import vista.VistaUsuario;
 
-/**
- *
- * @author marku
- */
-public class CtrlLogin implements ActionListener{
+
+public class CtrlHomero implements ActionListener{
     
   
     
@@ -37,9 +33,11 @@ public class CtrlLogin implements ActionListener{
     private VistaServicio vser;
     private UsuarioMVC usmvc;
     private Usuario us;
+    private VistaListaUsuarios vlus;
+    TableRowSorter trs;
     
     
-      public CtrlLogin(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser, Usuario us, UsuarioMVC usmvc){
+      public CtrlHomero(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser, Usuario us, UsuarioMVC usmvc, VistaListaUsuarios vlus){
         this.l = l;
         this.lmvc = lmvc;
         this.vl = vl;       
@@ -50,6 +48,7 @@ public class CtrlLogin implements ActionListener{
         this.vser = vser;   
         this.us = us;
         this.usmvc = usmvc;
+        this.vlus = vlus;
         this.vin.btnUsuarios.addActionListener(this);
         this.vin.btnSisApp.addActionListener(this);
         this.vin.btnSisBD.addActionListener(this);
@@ -60,6 +59,7 @@ public class CtrlLogin implements ActionListener{
         this.vsisbd.btnVolver2.addActionListener(this);
         this.vser.btnVolver.addActionListener(this);
         this.vus.btnGuardar.addActionListener(this);
+        this.vus.btnListar.addActionListener(this);
        
         
 }
@@ -68,7 +68,7 @@ public class CtrlLogin implements ActionListener{
     {
         vl.setTitle("Login");
         vl.setLocationRelativeTo(null);
-        vl.setVisible(true);   
+        vl.setVisible(true);      
     }
     
     public void volver(){
@@ -92,12 +92,45 @@ public class CtrlLogin implements ActionListener{
         
     }
     
-    /*public void iniciarb()
-    {       
-        vsal.setTitle("Productos");
-        vsal.setLocationRelativeTo(null);          
-        vsal.setVisible(true);
-    }*/
+     public void LlenarTabla(JTable tabla){
+        DefaultTableModel modeloT = new DefaultTableModel();
+        tabla.setModel(modeloT);
+        modeloT.addColumn("id");
+        modeloT.addColumn("rut");
+        modeloT.addColumn("dv");
+        modeloT.addColumn("nombre");
+        modeloT.addColumn("Apellido Paterno");
+        modeloT.addColumn("Apellido Materno");
+        modeloT.addColumn("Fecha Nacimiento");
+        modeloT.addColumn("Telefono");
+        modeloT.addColumn("Email");
+        modeloT.addColumn("Direccion");
+        modeloT.addColumn("Usuario");
+        modeloT.addColumn("Contrasena");
+        modeloT.addColumn("ID Perfil");
+        
+        Object[] columna = new Object[13];
+        
+        int numRegistros = usmvc.listar().size();
+        
+        for (int i=0; i<numRegistros; i++ ){
+            columna[0] = usmvc.listar().get(i).getId_usuario();
+            columna[1] = usmvc.listar().get(i).getRut_us();
+            columna[2] = usmvc.listar().get(i).getDv_us();
+            columna[3] = usmvc.listar().get(i).getNombre_us();
+            columna[4] = usmvc.listar().get(i).getApaterno_us();
+            columna[5] = usmvc.listar().get(i).getAmaterno_us();
+            columna[6] = usmvc.listar().get(i).getFnaciemiento_us();
+            columna[7] = usmvc.listar().get(i).getTelefono_us();
+            columna[8] = usmvc.listar().get(i).getEmail_us();
+            columna[9] = usmvc.listar().get(i).getDireccion();
+            columna[10] = usmvc.listar().get(i).getUsuario();
+            columna[11] = usmvc.listar().get(i).getContrasena();
+            columna[12] = usmvc.listar().get(i).getPerfil_id();
+            modeloT.addRow(columna);
+        }
+        
+    }        
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -107,7 +140,7 @@ public class CtrlLogin implements ActionListener{
                 vin.setVisible(false);
                 vus.setTitle("Vista Usuario");
                 vus.setLocationRelativeTo(null);  
-                vus.setVisible(true);  
+                vus.setVisible(true);
         }
         
         if(e.getSource() == vin.btnSisApp){
@@ -192,6 +225,15 @@ public class CtrlLogin implements ActionListener{
             }          
         }
         
+        if(e.getSource() == vus.btnListar){
+            
+            vus.setVisible(false);
+            vlus.setTitle("Vista Lista Usuarios");
+            vlus.setLocationRelativeTo(null);  
+            vlus.setVisible(true);         
+            LlenarTabla(vlus.jTablaUsuarios);
+        }        
+                
     }
     
 }
