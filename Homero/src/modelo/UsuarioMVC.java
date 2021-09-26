@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,19 +14,16 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 
-/**
- *
- * @author marku
- */
+
 public class UsuarioMVC extends ConexionBD{
     
     public boolean registrar(Usuario us){
-        PreparedStatement ps = null;
-        Connection con = getConexion();        
-        String sql = "INSERT INTO USUARIO VALUES(id_usuario_seq.nextval,?,?,?,?,?,to_date(?,'dd/mm/yyyy'),?,?,?,?,?,?)";    
         
+        CallableStatement ps = null;
+        Connection con = getConexion();                 
+        String sql = "{call sp_agregar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?)}";  
         try {
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             ps.setString(1, us.getRut_us());
             ps.setString(2, us.getDv_us());
             ps.setString(3, us.getNombre_us());
@@ -38,6 +36,7 @@ public class UsuarioMVC extends ConexionBD{
             ps.setString(10, us.getUsuario());
             ps.setString(11, us.getContrasena());
             ps.setInt(12, us.getPerfil_id());
+            ps.setInt(13, 1);
             ps.execute();
             return true;
         } catch (SQLException e) {
