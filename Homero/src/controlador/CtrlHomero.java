@@ -2,6 +2,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +19,7 @@ import vista.VistaServicio;
 import vista.VistaSisApli;
 import vista.VistaSisBD;
 import vista.VistaUsuario;
+
 
 
 public class CtrlHomero implements ActionListener{
@@ -58,8 +61,11 @@ public class CtrlHomero implements ActionListener{
         this.vsisapp.btnVolver.addActionListener(this);
         this.vsisbd.btnVolver2.addActionListener(this);
         this.vser.btnVolver.addActionListener(this);
+        this.vlus.btnVolver.addActionListener(this);
         this.vus.btnGuardar.addActionListener(this);
         this.vus.btnListar.addActionListener(this);
+        this.vus.btnBuscar.addActionListener(this);
+        this.vus.btnModificar.addActionListener(this);
        
         
 }
@@ -82,13 +88,13 @@ public class CtrlHomero implements ActionListener{
         vus.txtNombre.setText(null);
         vus.txtApaterno.setText(null);
         vus.txtAmaterno.setText(null);
-        vus.txtFnacimiento.setText(null);
+        //vus.txtFnacimiento.setText(null);
         vus.txtTelefono.setText(null);
         vus.txtEmail.setText(null);
         vus.txtDireccion.setText(null);
         vus.txtUsuario.setText(null);
         vus.txtContrasena.setText(null);
-        vus.txtIdPerfil.setText(null);
+        //vus.txtIdPerfil.setText(null);
         
     }
     
@@ -141,6 +147,8 @@ public class CtrlHomero implements ActionListener{
                 vus.setTitle("Vista Usuario");
                 vus.setLocationRelativeTo(null);  
                 vus.setVisible(true);
+                usmvc.Cargar_combobox(vus.cbox_perfiles);
+                vus.txtFecha.setVisible(false);
         }
         
         if(e.getSource() == vin.btnSisApp){
@@ -183,7 +191,12 @@ public class CtrlHomero implements ActionListener{
         if(e.getSource() == vsisbd.btnVolver2){
                 vsisbd.setVisible(false);
                 volver();  
-        }  
+        } 
+        //Acciones Vista Usuario
+        if(e.getSource() == vlus.btnVolver){
+                vlus.setVisible(false);
+                volver();  
+        }
         
         //Acciones Vista Login
         if(e.getSource() == vl.btnAceptar){
@@ -205,13 +218,14 @@ public class CtrlHomero implements ActionListener{
             us.setNombre_us(vus.txtNombre.getText());
             us.setApaterno_us(vus.txtApaterno.getText());
             us.setAmaterno_us(vus.txtAmaterno.getText());
-            us.setFnaciemiento_us(vus.txtFnacimiento.getText());
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            us.setFnaciemiento_us(formatoFecha.format(vus.jdFecha.getDate()));
             us.setTelefono_us(vus.txtTelefono.getText());
             us.setEmail_us(vus.txtEmail.getText());
             us.setDireccion(vus.txtDireccion.getText());
             us.setUsuario(vus.txtUsuario.getText());
             us.setContrasena(vus.txtContrasena.getText());
-            us.setPerfil_id(Integer.parseInt(vus.txtIdPerfil.getText()));           
+            us.setPerfil_id(vus.cbox_perfiles.getSelectedIndex());           
                     
             
             if(usmvc.registrar(us))
@@ -232,7 +246,64 @@ public class CtrlHomero implements ActionListener{
             vlus.setLocationRelativeTo(null);  
             vlus.setVisible(true);         
             LlenarTabla(vlus.jTablaUsuarios);
-        }        
+        }      
+        
+        if(e.getSource() == vus.btnModificar){
+            us.setRut_us(vus.txtRut.getText());
+            us.setDv_us(vus.txtDv.getText());
+            us.setNombre_us(vus.txtNombre.getText());
+            us.setApaterno_us(vus.txtApaterno.getText());
+            us.setAmaterno_us(vus.txtAmaterno.getText());
+            if(vus.jdFecha.getDate() == null){    
+                us.setFnaciemiento_us(vus.txtFecha.getText());
+            }
+            if(vus.jdFecha.getDate() != null){
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            us.setFnaciemiento_us(formatoFecha.format(vus.jdFecha.getDate()));
+            }            
+            us.setTelefono_us(vus.txtTelefono.getText());
+            us.setEmail_us(vus.txtEmail.getText());
+            us.setDireccion(vus.txtDireccion.getText());
+            us.setUsuario(vus.txtUsuario.getText());
+            us.setContrasena(vus.txtContrasena.getText());
+            us.setPerfil_id(vus.cbox_perfiles.getSelectedIndex()); 
+            if(usmvc.modificar(us))
+            {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+                
+            } else 
+            {
+                JOptionPane.showMessageDialog(null, "Error al modificar");
+                
+            } 
+        }
+        
+        if(e.getSource() == vus.btnBuscar){            
+            us.setRut_us(vus.txtRut.getText());
+            us.setDv_us(vus.txtDv.getText());
+            if(usmvc.buscar(us))
+            {
+                vus.txtRut.setText(String.valueOf(us.getRut_us()));
+                vus.txtDv.setText(String.valueOf(us.getDv_us()));
+                vus.txtNombre.setText(String.valueOf(us.getNombre_us()));
+                vus.txtApaterno.setText(String.valueOf(us.getApaterno_us()));
+                vus.txtAmaterno.setText(String.valueOf(us.getAmaterno_us()));
+                String fecha = us.getFnaciemiento_us().substring(8,10)+us.getFnaciemiento_us().substring(4,8)+us.getFnaciemiento_us().substring(2,4);
+                //+us.getFnaciemiento_us().substring(0,10)
+                System.out.println(fecha);
+                vus.txtFecha.setText(String.valueOf(fecha));
+                //vus.jdFecha.setDate(Date.valueOf(us.getFnaciemiento_us()));
+                vus.txtTelefono.setText(String.valueOf(us.getTelefono_us()));
+                vus.txtEmail.setText(String.valueOf(us.getEmail_us()));
+                vus.txtDireccion.setText(String.valueOf(us.getDireccion()));
+                vus.txtUsuario.setText(String.valueOf(us.getUsuario()));
+                vus.txtContrasena.setText(String.valueOf(us.getContrasena()));
+                vus.cbox_perfiles.setSelectedIndex(us.getPerfil_id());
+                
+                
+                        
+            }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+        }
                 
     }
     

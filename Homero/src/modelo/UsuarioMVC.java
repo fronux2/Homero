@@ -51,6 +51,44 @@ public class UsuarioMVC extends ConexionBD{
         }   
     }    
     
+    
+    public boolean modificar(Usuario us){
+        PreparedStatement ps = null;
+        Connection con = getConexion();        
+        String sql = "UPDATE usuario SET rut_us = ?, dv_us = ?, nombre_us = ?, apaterno_us = ?, amaterno_us = ?,f_nac_us = to_date(?, 'dd/mm/yyyy'), telefono_us = ?, email_us = ?, direccion = ?, usuario = ?, contrasena = ?, perfiles_id_perfiles = ? where rut_us = ? and dv_us = ?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, us.getRut_us());
+            ps.setString(2, us.getDv_us());
+            ps.setString(3, us.getNombre_us());
+            ps.setString(4, us.getApaterno_us());
+            ps.setString(5, us.getAmaterno_us());
+            ps.setString(6, us.getFnaciemiento_us());
+            ps.setString(7, us.getTelefono_us());
+            ps.setString(8, us.getEmail_us());
+            ps.setString(9, us.getDireccion());
+            ps.setString(10, us.getUsuario());
+            ps.setString(11, us.getContrasena());
+            ps.setInt(12, us.getPerfil_id());
+            ps.setString(13, us.getRut_us());
+            ps.setString(14, us.getDv_us());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        
+        }
+    
+    }
+    
     public boolean eliminar(Usuario us){
         PreparedStatement ps = null;
         Connection con = getConexion();        
@@ -77,23 +115,28 @@ public class UsuarioMVC extends ConexionBD{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "select * from usuario where rut_us = ?";
+        String sql = "select * from usuario where rut_us = ? and dv_us = ?";
         
         try {
             ps = con.prepareStatement(sql); 
             ps.setString(1, us.getRut_us());
+            ps.setString(2, us.getDv_us());
             rs = ps.executeQuery();
             
-            if(rs.next()){
-                us.setRut_us(rs.getString("rut"));
-                us.setDv_us(rs.getString("dv"));
-                us.setNombre_us(rs.getString("nombre"));
-                us.setApaterno_us(rs.getString("apaterno"));
-                us.setAmaterno_us(rs.getString("amaterno"));
-                us.setFnaciemiento_us(rs.getString("fnacimiento_us"));
-                us.setTelefono_us(rs.getString("telefono"));
-                us.setEmail_us(rs.getString("email"));
+            if(rs.next()){               
+                               
+                us.setRut_us(rs.getString("rut_us"));
+                us.setDv_us(rs.getString("dv_us"));
+                us.setNombre_us(rs.getString("nombre_us"));
+                us.setApaterno_us(rs.getString("apaterno_us"));
+                us.setAmaterno_us(rs.getString("amaterno_us"));
+                us.setFnaciemiento_us(rs.getString("f_nac_us"));
+                us.setTelefono_us(rs.getString("telefono_us"));
+                us.setEmail_us(rs.getString("email_us"));
                 us.setDireccion(rs.getString("direccion"));
+                us.setUsuario(rs.getString("usuario"));
+                us.setContrasena(rs.getString("contrasena"));
+                us.setPerfil_id(rs.getInt("perfiles_id_perfiles"));
                 return true;
             }else{return false;}
             
@@ -149,4 +192,27 @@ public class UsuarioMVC extends ConexionBD{
         }
         return listaProducto;
     }       
+    
+    public boolean Cargar_combobox(JComboBox cbox_nombre){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select detalle from perfiles ";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_nombre.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_nombre.addItem(rs.getString("detalle"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
 }
