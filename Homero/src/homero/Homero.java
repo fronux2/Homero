@@ -13,6 +13,8 @@ import vista.VistaServicio;
 import vista.VistaSisApli;
 import vista.VistaSisBD;
 import vista.VistaUsuario;
+import vista.*;
+import modelo.*;
 
 public class Homero {
 
@@ -28,10 +30,12 @@ public class Homero {
         Usuario us = new Usuario();
         UsuarioMVC usmvc = new UsuarioMVC();
         VistaListaUsuarios vlus = new VistaListaUsuarios();
+        SisApp sisapp = new SisApp();
+        SisAppMVC sisappmvc = new SisAppMVC();
         
         
         
-        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus);
+        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc);
         ctrl.iniciar();
     }
     

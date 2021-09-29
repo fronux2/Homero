@@ -179,6 +179,7 @@ public class UsuarioMVC extends ConexionBD{
                 us.setUsuario(rs.getString(11));
                 us.setContrasena(rs.getString(12));
                 us.setPerfil_id(rs.getInt(13));
+                us.setActivo(rs.getString(14).charAt(0));
                 listaProducto.add(us);
             }
         } catch (Exception e) {
