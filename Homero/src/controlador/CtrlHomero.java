@@ -74,6 +74,9 @@ public class CtrlHomero implements ActionListener{
         this.vus.btnListar.addActionListener(this);
         this.vus.btnBuscar.addActionListener(this);
         this.vus.btnModificar.addActionListener(this);
+        this.vsisapp.btnGuardar.addActionListener(this);
+        this.vsisapp.btnListar.addActionListener(this);        
+        this.vsisapp.btnModificar.addActionListener(this);
        
         
 }
@@ -213,6 +216,26 @@ public class CtrlHomero implements ActionListener{
                 vin.setLocationRelativeTo(null);  
                 vin.setVisible(true);            
             }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+        }
+        //Vista Gestion SisApp
+        
+        if(e.getSource() == vsisapp.btnGuardar){       
+            sisapp.setSoftware_bd(vsisapp.txtSBD.getText());
+            sisapp.setNombre_sis(vsisapp.txtNSis.getText());
+            sisapp.setLenguaje_sis(vsisapp.txtLSis.getText());
+            sisapp.setProvedor_sistema(vsisapp.txtPSIS.getText());
+            sisapp.setServidor_id(Integer.parseInt(vsisapp.txtIdServidor.getText()));
+            sisapp.setUsuario_id(Integer.parseInt(vsisapp.txtIdEncargado.getText()));
+            
+            if(sisappmvc.registrar(sisapp))
+            {
+                JOptionPane.showMessageDialog(null, "Registro Guardado");
+                limpiarUsuario();
+            } else 
+            {
+                JOptionPane.showMessageDialog(null, "Error al guardar");
+                //limpiarUsuario();
+            }          
         }
         
         //Vista Gestion Usuarios
