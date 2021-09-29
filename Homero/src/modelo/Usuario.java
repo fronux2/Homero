@@ -17,6 +17,8 @@ public class Usuario {
     private String usuario;
     private String contrasena;
     private int perfil_id;
+    private char activo;
+    
     
     public int getId_usuario() {
         return id_usuario;
@@ -121,6 +123,15 @@ public class Usuario {
     public void setPerfil_id(int perfil_id) {
         this.perfil_id = perfil_id;
     }
+    
+    public char getActivo() {
+        return activo;
+    }
+
+    public void setActivo(char activo) {
+        this.activo = activo;
+    }
+    
     
     
     

@@ -20,6 +20,10 @@ import vista.VistaSisApli;
 import vista.VistaSisBD;
 import vista.VistaUsuario;
 
+import vista.*;
+import modelo.*;
+
+
 
 
 public class CtrlHomero implements ActionListener{
@@ -37,10 +41,12 @@ public class CtrlHomero implements ActionListener{
     private UsuarioMVC usmvc;
     private Usuario us;
     private VistaListaUsuarios vlus;
+    private SisApp sisapp;
+    private SisAppMVC sisappmvc;
     TableRowSorter trs;
     
     
-      public CtrlHomero(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser, Usuario us, UsuarioMVC usmvc, VistaListaUsuarios vlus){
+      public CtrlHomero(Login l, LoginMVC lmvc, VistaLogin vl, VistaIndex vin, VistaUsuario vus, VistaSisApli vsisapp, VistaSisBD vsisbd, VistaServicio vser, Usuario us, UsuarioMVC usmvc, VistaListaUsuarios vlus,SisApp sisapp, SisAppMVC sisappmvc){
         this.l = l;
         this.lmvc = lmvc;
         this.vl = vl;       
@@ -52,6 +58,8 @@ public class CtrlHomero implements ActionListener{
         this.us = us;
         this.usmvc = usmvc;
         this.vlus = vlus;
+        this.sisapp = sisapp;
+        this.sisappmvc = sisappmvc;
         this.vin.btnUsuarios.addActionListener(this);
         this.vin.btnSisApp.addActionListener(this);
         this.vin.btnSisBD.addActionListener(this);
@@ -88,6 +96,7 @@ public class CtrlHomero implements ActionListener{
         vus.txtNombre.setText(null);
         vus.txtApaterno.setText(null);
         vus.txtAmaterno.setText(null);
+        vus.txtDv.setText(null);
         //vus.txtFnacimiento.setText(null);
         vus.txtTelefono.setText(null);
         vus.txtEmail.setText(null);
@@ -95,6 +104,7 @@ public class CtrlHomero implements ActionListener{
         vus.txtUsuario.setText(null);
         vus.txtContrasena.setText(null);
         //vus.txtIdPerfil.setText(null);
+        vus.cbox_perfiles.removeAllItems();
         
     }
     
@@ -114,8 +124,8 @@ public class CtrlHomero implements ActionListener{
         modeloT.addColumn("Usuario");
         modeloT.addColumn("Contrasena");
         modeloT.addColumn("ID Perfil");
-        
-        Object[] columna = new Object[13];
+        modeloT.addColumn("Activo");
+        Object[] columna = new Object[14];
         
         int numRegistros = usmvc.listar().size();
         
@@ -133,6 +143,7 @@ public class CtrlHomero implements ActionListener{
             columna[10] = usmvc.listar().get(i).getUsuario();
             columna[11] = usmvc.listar().get(i).getContrasena();
             columna[12] = usmvc.listar().get(i).getPerfil_id();
+            columna[13] = usmvc.listar().get(i).getActivo();
             modeloT.addRow(columna);
         }
         
@@ -169,14 +180,7 @@ public class CtrlHomero implements ActionListener{
                 vsisbd.setTitle("Vista Sistema Base de Datos");
                 vsisbd.setLocationRelativeTo(null);  
                 vsisbd.setVisible(true);  
-        }
-        
-        
-        
-        
-        
-        
-         
+        }      
         //Acciones Vista Usuario
         if(e.getSource() == vus.btnVolver){
                 vus.setVisible(false);
@@ -246,6 +250,7 @@ public class CtrlHomero implements ActionListener{
             vlus.setLocationRelativeTo(null);  
             vlus.setVisible(true);         
             LlenarTabla(vlus.jTablaUsuarios);
+            limpiarUsuario();
         }      
         
         if(e.getSource() == vus.btnModificar){

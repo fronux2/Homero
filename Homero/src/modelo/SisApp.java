@@ -58,6 +58,13 @@ public class SisApp {
     public void setUsuario_id(int usuario_id) {
         this.usuario_id = usuario_id;
     }
+    public char getActivo() {
+        return activo;
+    }
+
+    public void setActivo(char activo) {
+        this.activo = activo;
+    }
     
     private int id_sistemas;
     private String software_bd;
@@ -65,5 +72,6 @@ public class SisApp {
     private String lenguaje_sis;
     private String provedor_sistema;
     private int servidor_id;
-    private int usuario_id; 
+    private int usuario_id;     
+    private char activo;
 }
