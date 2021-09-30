@@ -71,27 +71,20 @@ public class SisBDMVC extends ConexionBD{
         return listaProducto;
     }  
     
-    public boolean modificar(Usuario us){
+    public boolean modificar(SisBD sisbd){
         PreparedStatement ps = null;
         Connection con = getConexion();        
-        String sql = "UPDATE usuario SET rut_us = ?, dv_us = ?, nombre_us = ?, apaterno_us = ?, amaterno_us = ?,f_nac_us = to_date(?, 'dd/mm/yyyy'), telefono_us = ?, email_us = ?, direccion = ?, usuario = ?, contrasena = ?, perfiles_id_perfiles = ? where rut_us = ? and dv_us = ?";
+        String sql = "UPDATE sisbd SET usuario = ?, contrasena = ?, software_bd = ?, servidor_id_servidor = ?, usuario_id_usuario = ?, activo = ? where id_bd = ? ";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, us.getRut_us());
-            ps.setString(2, us.getDv_us());
-            ps.setString(3, us.getNombre_us());
-            ps.setString(4, us.getApaterno_us());
-            ps.setString(5, us.getAmaterno_us());
-            ps.setString(6, us.getFnaciemiento_us());
-            ps.setString(7, us.getTelefono_us());
-            ps.setString(8, us.getEmail_us());
-            ps.setString(9, us.getDireccion());
-            ps.setString(10, us.getUsuario());
-            ps.setString(11, us.getContrasena());
-            ps.setInt(12, us.getPerfil_id());
-            ps.setString(13, us.getRut_us());
-            ps.setString(14, us.getDv_us());
+            ps.setString(1, sisbd.getUsuario());
+            ps.setString(2, sisbd.getContrasena());
+            ps.setString(3, sisbd.getSoftware_bd());
+            ps.setInt(4, sisbd.getServidor_id());
+            ps.setInt(5, sisbd.getUsuario_id());   
+            ps.setInt(6, sisbd.getActivo());
+            ps.setInt(7, sisbd.getId_bd());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -107,4 +100,39 @@ public class SisBDMVC extends ConexionBD{
         }
     
     }
+    
+    public boolean buscar(SisBD sisbd){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from sisbd where id_bd = ?";
+        
+        try {
+            ps = con.prepareStatement(sql); 
+            ps.setInt(1, sisbd.getId_bd());
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next()){               
+                sisbd.setUsuario(rs.getString("usuario"));
+                sisbd.setContrasena(rs.getString("contrasena"));
+                sisbd.setSoftware_bd(rs.getString("software_bd"));
+                sisbd.setServidor_id(rs.getInt("servidor_id_servidor"));
+                sisbd.setUsuario_id(rs.getInt("usuario_id_usuario"));
+                sisbd.setActivo(rs.getString("activo").charAt(0));                
+                return true;
+            }else{return false;}
+            
+        } catch (Exception e) {
+        }finally{
+            try {
+                con.close();
+                System.out.println("Conexion cerrada");
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        return false;
+     }
 }
