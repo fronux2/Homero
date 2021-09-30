@@ -32,10 +32,17 @@ public class Homero {
         VistaListaUsuarios vlus = new VistaListaUsuarios();
         SisApp sisapp = new SisApp();
         SisAppMVC sisappmvc = new SisAppMVC();
+        SisBD sisbd = new SisBD();
+        SisBDMVC sisbdmvc = new SisBDMVC();
+        Servicio ser = new Servicio();
+        ServicioMVC sermvc = new ServicioMVC();
+        VistaListaServicio vlser = new VistaListaServicio();
+        VistaListaSisApp vlsisapp = new VistaListaSisApp();
+        VistaListaSisBD vlsisbd = new VistaListaSisBD();
         
         
         
-        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc);
+        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc, sisbd, sisbdmvc, ser, sermvc, vlser, vlsisapp, vlsisbd);
         ctrl.iniciar();
     }
     
