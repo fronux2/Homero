@@ -87,6 +87,7 @@ public class SisAppMVC extends ConexionBD{
             ps.setInt(6, sisapp.getUsuario_id());
             ps.setInt(7, sisapp.getActivo());
             ps.setInt(8, sisapp.getId_sistemas());
+            
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -122,7 +123,8 @@ public class SisAppMVC extends ConexionBD{
                 sisapp.setLenguaje_sis(rs.getString("lenguaje_sis"));
                 sisapp.setProvedor_sistema(rs.getString("provedor_sistema"));
                 sisapp.setServidor_id(rs.getInt("servidor_id_servidor"));
-                sisapp.setUsuario_id(rs.getInt("usuario_id_usuario"));                
+                sisapp.setUsuario_id(rs.getInt("usuario_id_usuario"));    
+                sisapp.setActivo(rs.getString("activo").charAt(0)); 
                 return true;
             }else{return false;}
             

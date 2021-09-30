@@ -87,6 +87,8 @@ public class CtrlHomero implements ActionListener{
         this.vlser.btnVolver.addActionListener(this);
         this.vlsisbd.btnVolver.addActionListener(this);
         this.vsisapp.btnBuscar.addActionListener(this);
+        this.vsisbd.btnBuscar.addActionListener(this);
+        this.vsisbd.btnModificar.addActionListener(this);
           
        
         
@@ -286,6 +288,7 @@ public class CtrlHomero implements ActionListener{
                 vsisbd.setTitle("Vista Sistema Base de Datos");
                 vsisbd.setLocationRelativeTo(null);  
                 vsisbd.setVisible(true);  
+                vsisbd.txtActivo.setVisible(false);
         }
         if(e.getSource() == vin.btnServicio){
                 vin.setVisible(false);
@@ -346,7 +349,7 @@ public class CtrlHomero implements ActionListener{
                 vin.setTitle("Index");
                 vin.setLocationRelativeTo(null);  
                 vin.setVisible(true);            
-            }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+            }else{JOptionPane.showMessageDialog(null, "No se encontro registro login");}
         }
         //Vista Gestion SisApp
         
@@ -470,7 +473,7 @@ public class CtrlHomero implements ActionListener{
             vlsisbd.setTitle("Vista Lista Sistema Base de Dato");
             vlsisbd.setLocationRelativeTo(null);  
             vlsisbd.setVisible(true);         
-            LlenarTablaSisApp(vlsisbd.jTablaBD);
+            LlenarTablaSisBD(vlsisbd.jTablaBD);
             limpiarServicio();
         }
         
@@ -507,20 +510,50 @@ public class CtrlHomero implements ActionListener{
         }
         
         if(e.getSource() == vsisapp.btnModificar){
+            
             vsisapp.txtActivo.setVisible(false);
             vsisapp.setVisible(false);
             vsisapp.setTitle("Vista Sistema Aplicacion");
             vsisapp.setLocationRelativeTo(null);  
             vsisapp.setVisible(true);
+            
+            //sisapp.setId_sistemas(Integer.parseInt(vsisapp.txtBuscar.getText()));
             sisapp.setSoftware_bd(vsisapp.txtSBD.getText());
             sisapp.setNombre_sis(vsisapp.txtNSis.getText());
             sisapp.setLenguaje_sis(vsisapp.txtLSis.getText());
             sisapp.setProvedor_sistema(vsisapp.txtPSIS.getText());
             sisapp.setServidor_id(Integer.parseInt(vsisapp.txtIdServidor.getText()));            
             sisapp.setUsuario_id(Integer.parseInt(vsisapp.txtIdEncargado.getText()));            
-            sisapp.setActivo((char) Integer.parseInt(vsisapp.txtActivo.getText()));
+            sisapp.setActivo((char) Integer.parseInt(vsisapp.txtActivo.getText()));    
             
             if(sisappmvc.modificar(sisapp))
+            {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+                limpiarSisApp();
+                
+            } else 
+            {
+                JOptionPane.showMessageDialog(null, "Error al modificar sistema app");
+                limpiarSisApp();
+                
+            } 
+        }
+        
+        if(e.getSource() == vsisbd.btnModificar){
+            vsisbd.txtActivo.setVisible(false);
+            vsisbd.setVisible(false);
+            vsisbd.setTitle("Vista Sistema BD");
+            vsisbd.setLocationRelativeTo(null);  
+            vsisbd.setVisible(true);
+            
+            sisbd.setUsuario(vsisbd.txtUsuario.getText());            
+            sisbd.setContrasena(vsisbd.txtContrasena.getText());
+            sisbd.setSoftware_bd(vsisbd.txtSBD.getText());
+            sisbd.setServidor_id(Integer.parseInt(vsisbd.txtIdSer.getText()));
+            sisbd.setUsuario_id(Integer.parseInt(vsisbd.txtIdUsuario.getText()));
+            sisbd.setActivo((char) Integer.parseInt(vsisbd.txtActivo.getText()));
+            
+            if(sisbdmvc.modificar(sisbd))
             {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
                 
@@ -552,11 +585,9 @@ public class CtrlHomero implements ActionListener{
                 vus.txtDireccion.setText(String.valueOf(us.getDireccion()));
                 vus.txtUsuario.setText(String.valueOf(us.getUsuario()));
                 vus.txtContrasena.setText(String.valueOf(us.getContrasena()));
-                vus.cbox_perfiles.setSelectedIndex(us.getPerfil_id());
+                vus.cbox_perfiles.setSelectedIndex(us.getPerfil_id());              
                 
-                
-                        
-            }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+            }else{JOptionPane.showMessageDialog(null, "No se encontro registro usuario");}
         }
         
         if(e.getSource() == vsisapp.btnBuscar){
@@ -565,8 +596,7 @@ public class CtrlHomero implements ActionListener{
             vsisapp.setVisible(false);
             vsisapp.setTitle("Vista Sistema Aplicacion");
             vsisapp.setLocationRelativeTo(null);  
-            vsisapp.setVisible(true);  
-            
+            vsisapp.setVisible(true);              
             sisapp.setId_sistemas(Integer.parseInt(vsisapp.txtBuscar.getText()));            
             if(sisappmvc.buscar(sisapp))
             {
@@ -578,9 +608,27 @@ public class CtrlHomero implements ActionListener{
                 vsisapp.txtIdEncargado.setText(String.valueOf(sisapp.getUsuario_id()));
                 vsisapp.txtIdEncargado.setText(String.valueOf(sisapp.getUsuario_id()));  
                 vsisapp.txtActivo.setText(String.valueOf(sisapp.getUsuario_id()));
-            }else{JOptionPane.showMessageDialog(null, "No se encontro registro");}
+            }else{JOptionPane.showMessageDialog(null, "No se encontro registro Sistema Aplicacion");}
         }
-                
+        
+        if(e.getSource() == vsisbd.btnBuscar){
+            vsisbd.txtActivo.setVisible(true);
+            vsisbd.setVisible(false);
+            vsisbd.setTitle("Vista Sistema BD");
+            vsisbd.setLocationRelativeTo(null);  
+            vsisbd.setVisible(true);    
+            sisbd.setId_bd(Integer.parseInt(vsisbd.txtBuscar.getText()));
+            if(sisbdmvc.buscar(sisbd))
+            {
+                vsisbd.txtActivo.setText(String.valueOf(sisbd.getActivo()));
+                vsisbd.txtContrasena.setText(String.valueOf(sisbd.getContrasena()));
+                vsisbd.txtIdSer.setText(String.valueOf(sisbd.getServidor_id()));
+                vsisbd.txtIdUsuario.setText(String.valueOf(sisbd.getServidor_id()));
+                vsisbd.txtSBD.setText(String.valueOf(sisbd.getSoftware_bd()));
+                vsisbd.txtUsuario.setText(String.valueOf(sisbd.getUsuario()));                
+            }else{JOptionPane.showMessageDialog(null, "No se encontro registro BD");}
+                    
+        }    
     }
     
 }
