@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 
 public class SisBDMVC extends ConexionBD{
@@ -135,4 +136,50 @@ public class SisBDMVC extends ConexionBD{
         
         return false;
      }
+    
+    public boolean Cargar_comboboxServidorId(JComboBox cbox_nombre){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select id_servidor from servidor";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_nombre.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_nombre.addItem(rs.getString("id_servidor"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+    
+    public boolean Cargar_comboboxIdUsuario(JComboBox cbox_nombre){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select id_usuario from usuario";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_nombre.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_nombre.addItem(rs.getString("id_usuario"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
 }

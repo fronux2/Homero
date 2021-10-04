@@ -41,11 +41,11 @@ public class VistaIndex extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel1.setText("Sistema Homero");
 
-        jMenu1.setText("Modulos");
+        jMenu1.setText("Módulos");
         jMenu1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         btnUsuarios.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnUsuarios.setText("Modulo Usuarios");
+        btnUsuarios.setText("Gestión Usuarios");
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuariosActionPerformed(evt);
@@ -54,7 +54,7 @@ public class VistaIndex extends javax.swing.JFrame {
         jMenu1.add(btnUsuarios);
 
         btnServicio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnServicio.setText("Modulo Servicio");
+        btnServicio.setText("Gestión Servicio");
         btnServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnServicioActionPerformed(evt);
@@ -63,11 +63,11 @@ public class VistaIndex extends javax.swing.JFrame {
         jMenu1.add(btnServicio);
 
         btnSisApp.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnSisApp.setText("Modulo Sistema Aplicacion");
+        btnSisApp.setText("Gestión Sistema Aplicacion");
         jMenu1.add(btnSisApp);
 
         btnSisBD.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnSisBD.setText("Modulo Sistema Base de Datos");
+        btnSisBD.setText("Gestión Sistema Base de Datos");
         jMenu1.add(btnSisBD);
 
         jMenuBar1.add(jMenu1);
