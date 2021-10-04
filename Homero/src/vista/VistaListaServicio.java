@@ -5,6 +5,12 @@
  */
 package vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author marku
@@ -14,6 +20,16 @@ public class VistaListaServicio extends javax.swing.JFrame {
     /**
      * Creates new form VistaListaServicio
      */
+    
+    DefaultTableModel modeloT = new DefaultTableModel();
+    TableRowSorter trs;
+    
+    public void Filtro ()
+    {
+        int ColumntaTabla = 0;
+        trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), ColumntaTabla));
+        
+    } 
     public VistaListaServicio() {
         initComponents();
     }
@@ -44,6 +60,12 @@ public class VistaListaServicio extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Buscador por ID:");
+
+        txtListar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtListarKeyTyped(evt);
+            }
+        });
 
         jTablaServicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +114,23 @@ public class VistaListaServicio extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void txtListarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListarKeyTyped
+        // TODO add your handling code here:.
+        txtListar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), 1));
+                String cadena = (txtListar.getText());
+                txtListar.setText(cadena);
+                Filtro();
+            }
+            
+        });
+        
+        trs = new TableRowSorter(jTablaServicio.getModel());
+        jTablaServicio.setRowSorter(trs);
+    }//GEN-LAST:event_txtListarKeyTyped
 
     /**
      * @param args the command line arguments

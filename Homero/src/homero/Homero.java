@@ -44,6 +44,8 @@ public class Homero {
         
         CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc, sisbd, sisbdmvc, ser, sermvc, vlser, vlsisapp, vlsisbd);
         ctrl.iniciar();
+        
+        
     }
     
 }

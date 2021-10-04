@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ServicioMVC extends ConexionBD{
+    
     public boolean registrar(Servicio serv){
         CallableStatement ps = null;
         Connection con = getConexion();                 
@@ -67,27 +69,18 @@ public class ServicioMVC extends ConexionBD{
         return listaProducto;
     } 
     
-    public boolean modificar(Usuario us){
+    public boolean modificar(Servicio ser){
         PreparedStatement ps = null;
         Connection con = getConexion();        
-        String sql = "UPDATE usuario SET rut_us = ?, dv_us = ?, nombre_us = ?, apaterno_us = ?, amaterno_us = ?,f_nac_us = to_date(?, 'dd/mm/yyyy'), telefono_us = ?, email_us = ?, direccion = ?, usuario = ?, contrasena = ?, perfiles_id_perfiles = ? where rut_us = ? and dv_us = ?";
+        String sql = "UPDATE servicio SET nombre_serv = ?, tipo_serv = ?, sisapp_id_sistemas = ?, activo = ? where id_servicios = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, us.getRut_us());
-            ps.setString(2, us.getDv_us());
-            ps.setString(3, us.getNombre_us());
-            ps.setString(4, us.getApaterno_us());
-            ps.setString(5, us.getAmaterno_us());
-            ps.setString(6, us.getFnaciemiento_us());
-            ps.setString(7, us.getTelefono_us());
-            ps.setString(8, us.getEmail_us());
-            ps.setString(9, us.getDireccion());
-            ps.setString(10, us.getUsuario());
-            ps.setString(11, us.getContrasena());
-            ps.setInt(12, us.getPerfil_id());
-            ps.setString(13, us.getRut_us());
-            ps.setString(14, us.getDv_us());
+            ps.setString(1, ser.getNombre_serv());
+            ps.setString(2, ser.getTipo_serv());
+            ps.setInt(3, ser.getSisApp());
+            ps.setInt(4, ser.getActivo());
+            ps.setInt(5, ser.getId_servicios());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -102,5 +95,61 @@ public class ServicioMVC extends ConexionBD{
         
         }
     
+    }
+    
+    public boolean buscar(Servicio ser){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from servicio where id_servicios = ?";
+        
+        try {
+            ps = con.prepareStatement(sql); 
+            ps.setInt(1, ser.getId_servicios());
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next()){      
+                ser.setNombre_serv(rs.getString("nombre_serv"));
+                ser.setTipo_serv(rs.getString("tipo_serv"));
+                ser.setSisApp(rs.getInt("sisapp_id_sistemas"));
+                ser.setActivo(rs.getString("activo").charAt(0));                
+                return true;
+            }else{return false;}
+            
+        } catch (Exception e) {
+        }finally{
+            try {
+                con.close();
+                System.out.println("Conexion cerrada");
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        return false;
+     }
+    
+    public boolean Cargar_combobox(JComboBox cbox_nombre){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select id_sistemas from sisapp ";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_nombre.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_nombre.addItem(rs.getString("id_sistemas"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
     }
 }

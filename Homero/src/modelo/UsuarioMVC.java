@@ -153,6 +153,69 @@ public class UsuarioMVC extends ConexionBD{
         return false;
      }
     
+    public boolean buscarRut(Usuario us){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select rut_us from usuario where rut_us = ?";
+        
+        try {
+            ps = con.prepareStatement(sql); 
+            ps.setString(1, us.getRut_us());           
+            rs = ps.executeQuery();
+            
+            if(rs.next()){    
+                us.setRut_us(rs.getString("rut_us"));
+                return true;
+            }else{return false;}
+            
+        } catch (Exception e) {
+        }finally{
+            try {
+                con.close();
+                System.out.println("Conexion cerrada");
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        return false;
+     }
+    
+    
+    public boolean buscarLogin(Usuario us){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from usuario where usuario = ? and contrasena = ?";
+        
+        try {
+            ps = con.prepareStatement(sql); 
+            ps.setString(1, us.getUsuario());    
+            ps.setString(2, us.getContrasena());
+            rs = ps.executeQuery();
+            
+            if(rs.next()){                    
+                us.setUsuario(rs.getString("usuario"));
+                us.setContrasena(rs.getString("contrasena"));
+                us.setPerfil_id(rs.getInt("perfiles_id_perfiles"));
+                return true;
+            }else{return false;}
+            
+        } catch (Exception e) {
+        }finally{
+            try {
+                con.close();
+                System.out.println("Conexion cerrada");
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        return false;
+     }
+    
+    
     public ArrayList<Usuario> listar(){
         ArrayList listaProducto = new ArrayList();
         Usuario us;

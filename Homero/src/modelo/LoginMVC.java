@@ -29,7 +29,7 @@ public class LoginMVC extends ConexionBD{
             ps.setString(2, l.getContrasena());           
             rs = ps.executeQuery();
             
-            if(rs.next()){                                
+            if(rs.next()){                   
                 return true;
             }return false;
             
