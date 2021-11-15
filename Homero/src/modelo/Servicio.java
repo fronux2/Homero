@@ -47,5 +47,14 @@ public class Servicio {
     private String tipo_serv;
     private int SisApp;
     private char activo;
+
+    public String getNombre_sis() {
+        return nombre_sis;
+    }
+
+    public void setNombre_sis(String nombre_sis) {
+        this.nombre_sis = nombre_sis;
+    }
+    private String nombre_sis;
     
 }

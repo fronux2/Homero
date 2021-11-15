@@ -66,6 +66,30 @@ public class SisApp {
         this.activo = activo;
     }
     
+    public String getNom_servidor() {
+        return nom_servidor;
+    }
+
+    public void setNom_servidor(String nom_servidor) {
+        this.nom_servidor = nom_servidor;
+    }
+
+    public String getNombre_us() {
+        return nombre_us;
+    }
+
+    public void setNombre_us(String nombre_us) {
+        this.nombre_us = nombre_us;
+    }
+    
+    public String getApellido_us() {
+        return apellido_us;
+    }
+
+    public void setApellido_us(String apellido_us) {
+        this.apellido_us = apellido_us;
+    }
+    
     private int id_sistemas;
     private String software_bd;
     private String nombre_sis;
@@ -74,4 +98,10 @@ public class SisApp {
     private int servidor_id;
     private int usuario_id;     
     private char activo;
+    private String nom_servidor;
+    private String nombre_us;
+    private String apellido_us;
+
+
+    
 }

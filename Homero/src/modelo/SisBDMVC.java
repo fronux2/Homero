@@ -41,7 +41,7 @@ public class SisBDMVC extends ConexionBD{
     public ArrayList<SisBD> listar(){
         ArrayList listaProducto = new ArrayList();
         SisBD sisbd;
-        String sql = "select * from SISBD";
+        String sql = "SELECT s.id_bd,s.usuario, s.contrasena, s.software_bd, s.servidor_id_servidor, s.usuario_id_usuario, s.activo, sr.nom_servidor, u.nombre_us, u.apaterno_us FROM sisbd s JOIN servidor sr ON(s.servidor_id_servidor = sr.id_servidor)  JOIN usuario u ON(s.usuario_id_usuario = u.id_usuario)";
         Connection con = getConexion();
         
         try {            
@@ -58,6 +58,9 @@ public class SisBDMVC extends ConexionBD{
                 sisbd.setServidor_id(rs.getInt(5));
                 sisbd.setUsuario_id(rs.getInt(6));                                
                 sisbd.setActivo(rs.getString(7).charAt(0));
+                sisbd.setNom_servidor(rs.getString(8));
+                sisbd.setNombre_us(rs.getString(9));
+                sisbd.setApaterno_us(rs.getString(10));
                 listaProducto.add(sisbd);
             }
         } catch (Exception e) {
@@ -106,7 +109,7 @@ public class SisBDMVC extends ConexionBD{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "select * from sisbd where id_bd = ?";
+        String sql = "SELECT s.id_bd,s.usuario, s.contrasena, s.software_bd, s.servidor_id_servidor, s.usuario_id_usuario, s.activo, sr.nom_servidor, u.nombre_us, u.apaterno_us FROM sisbd s JOIN servidor sr ON(s.servidor_id_servidor = sr.id_servidor)  JOIN usuario u ON(s.usuario_id_usuario = u.id_usuario) where id_bd = ?";
         
         try {
             ps = con.prepareStatement(sql); 
@@ -120,7 +123,10 @@ public class SisBDMVC extends ConexionBD{
                 sisbd.setSoftware_bd(rs.getString("software_bd"));
                 sisbd.setServidor_id(rs.getInt("servidor_id_servidor"));
                 sisbd.setUsuario_id(rs.getInt("usuario_id_usuario"));
-                sisbd.setActivo(rs.getString("activo").charAt(0));                
+                sisbd.setActivo(rs.getString("activo").charAt(0));  
+                sisbd.setNom_servidor(rs.getString("nom_servidor"));
+                sisbd.setNombre_us(rs.getString("nombre_us"));
+                sisbd.setApaterno_us(rs.getString("apaterno_us"));
                 return true;
             }else{return false;}
             
@@ -143,12 +149,12 @@ public class SisBDMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "Select id_servidor from servidor";
+            sql = "Select id_servidor, nom_servidor from servidor";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_servidor"));
+                cbox_nombre.addItem(rs.getString("id_servidor")+" . "+rs.getString("nom_servidor"));
             }
         } catch (SQLException e) {
         }finally{
@@ -166,12 +172,12 @@ public class SisBDMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "Select id_usuario from usuario";
+            sql = "select id_usuario, nombre_us||' '||apaterno_us as nombre from usuario where perfiles_id_perfiles = 3";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_usuario"));
+                cbox_nombre.addItem(rs.getString("id_usuario")+" . "+rs.getString("nombre"));
             }
         } catch (SQLException e) {
         }finally{

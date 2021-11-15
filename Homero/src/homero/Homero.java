@@ -1,8 +1,7 @@
 package homero;
 
 import controlador.CtrlHomero;
-import modelo.Login;
-import modelo.LoginMVC;
+
 import modelo.Usuario;
 import modelo.UsuarioMVC;
 import vista.VistaIndex;
@@ -19,8 +18,7 @@ import modelo.*;
 public class Homero {
 
     public static void main(String[] args) {
-        Login l = new Login();
-        LoginMVC lmvc = new LoginMVC();
+        
         VistaLogin vl = new VistaLogin();               
         VistaIndex vin = new VistaIndex();
         VistaUsuario vus = new VistaUsuario();
@@ -42,10 +40,10 @@ public class Homero {
         
         
         
-        CtrlHomero ctrl = new CtrlHomero(l, lmvc, vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc, sisbd, sisbdmvc, ser, sermvc, vlser, vlsisapp, vlsisbd);
+        CtrlHomero ctrl = new CtrlHomero(vl, vin, vus, vsisapp, vsisbd, vser, us, usmvc, vlus, sisapp,sisappmvc, sisbd, sisbdmvc, ser, sermvc, vlser, vlsisapp, vlsisbd);
         ctrl.iniciar();
         
-        
+       
     }
     
 }

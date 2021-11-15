@@ -25,7 +25,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="342" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+              <Component id="Seleccionar" min="-2" pref="131" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="106" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtListar" min="-2" pref="131" max="-2" attributes="0"/>
@@ -44,7 +46,10 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnVolver" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtListar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="Seleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="471" max="32767" attributes="0"/>
@@ -108,5 +113,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="Seleccionar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seleccionar"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
   </SubComponents>
 </Form>

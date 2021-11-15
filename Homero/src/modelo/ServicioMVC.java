@@ -38,7 +38,7 @@ public class ServicioMVC extends ConexionBD{
     public ArrayList<Servicio> listar(){
         ArrayList listaProducto = new ArrayList();
         Servicio ser;
-        String sql = "select * from servicio";
+        String sql = "SELECT s.id_servicios,s.nombre_serv, s.tipo_serv, s.sisapp_id_sistemas, s.activo, sp.nombre_sis FROM servicio s JOIN sisapp sp ON(s.sisapp_id_sistemas = sp.id_sistemas)";
         Connection con = getConexion();
         
         try {            
@@ -53,6 +53,7 @@ public class ServicioMVC extends ConexionBD{
                 ser.setTipo_serv(rs.getString(3));
                 ser.setSisApp(rs.getInt(4));
                 ser.setActivo(rs.getString(5).charAt(0));
+                ser.setNombre_sis(rs.getString(6));
                 
                 
                 listaProducto.add(ser);
@@ -101,7 +102,7 @@ public class ServicioMVC extends ConexionBD{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "select * from servicio where id_servicios = ?";
+        String sql = "SELECT s.id_servicios,s.nombre_serv, s.tipo_serv, s.sisapp_id_sistemas, s.activo, sp.nombre_sis FROM servicio s JOIN sisapp sp ON(s.sisapp_id_sistemas = sp.id_sistemas) where id_servicios = ?";
         
         try {
             ps = con.prepareStatement(sql); 
@@ -113,7 +114,8 @@ public class ServicioMVC extends ConexionBD{
                 ser.setNombre_serv(rs.getString("nombre_serv"));
                 ser.setTipo_serv(rs.getString("tipo_serv"));
                 ser.setSisApp(rs.getInt("sisapp_id_sistemas"));
-                ser.setActivo(rs.getString("activo").charAt(0));                
+                ser.setActivo(rs.getString("activo").charAt(0)); 
+                ser.setNombre_sis(rs.getString("nombre_sis"));
                 return true;
             }else{return false;}
             
@@ -136,12 +138,12 @@ public class ServicioMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "Select id_sistemas from sisapp ";
+            sql = "Select id_sistemas, nombre_sis from sisapp ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_sistemas"));
+                cbox_nombre.addItem(rs.getString("id_sistemas")+" . "+rs.getString("nombre_sis"));
             }
         } catch (SQLException e) {
         }finally{

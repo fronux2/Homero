@@ -17,7 +17,17 @@ public class Usuario {
     private String usuario;
     private String contrasena;
     private int perfil_id;
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+    private String detalle;
     private char activo;
+    
     
     
     public int getId_usuario() {
