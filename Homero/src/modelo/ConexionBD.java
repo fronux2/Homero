@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 public class ConexionBD {
     Connection con = null;
         String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String nombre = "homero2";
-        String contrasena = "homero2";
+        String nombre = "homero";
+        String contrasena = "homero";
         public Connection getConexion(){
             try {
                 Class.forName("oracle.jdbc.driver.OracleDriver");

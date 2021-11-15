@@ -25,7 +25,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="388" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+              <Component id="Seleccionar" min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="98" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtFiltro" min="-2" pref="103" max="-2" attributes="0"/>
@@ -45,6 +47,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtFiltro" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="Seleccionar" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
                   </Group>
@@ -111,6 +114,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Filtro por ID:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Seleccionar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seleccionar"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

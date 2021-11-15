@@ -41,7 +41,7 @@ public class SisAppMVC extends ConexionBD{
     public ArrayList<SisApp> listar(){
         ArrayList listaProducto = new ArrayList();
         SisApp sisapp;
-        String sql = "select * from SISAPP";
+        String sql = "SELECT s.id_sistemas, s.software_bd, s.nombre_sis, s.lenguaje_sis,s.provedor_sistema, s.servidor_id_servidor, s.usuario_id_usuario,s.activo, sr.nom_servidor, u.nombre_us, u.apaterno_us FROM sisapp s JOIN servidor sr ON(s.servidor_id_servidor = sr.id_servidor)  JOIN usuario u ON(s.usuario_id_usuario = u.id_usuario)";
         Connection con = getConexion();
         
         try {            
@@ -59,6 +59,9 @@ public class SisAppMVC extends ConexionBD{
                 sisapp.setServidor_id(rs.getInt(6));
                 sisapp.setUsuario_id(rs.getInt(7));                
                 sisapp.setActivo(rs.getString(8).charAt(0));
+                sisapp.setNom_servidor(rs.getString(9));
+                sisapp.setNombre_us(rs.getString(10));
+                sisapp.setApellido_us(rs.getString(11));
                 listaProducto.add(sisapp);
             }
         } catch (Exception e) {
@@ -67,7 +70,9 @@ public class SisAppMVC extends ConexionBD{
             try {
                 con.close();
             } catch (SQLException e) {
+                
                 System.err.println(e);
+                
             }        
         }
         return listaProducto;
@@ -110,7 +115,7 @@ public class SisAppMVC extends ConexionBD{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "select * from sisapp where id_sistemas = ?";
+        String sql = "SELECT s.id_sistemas, s.software_bd, s.nombre_sis, s.lenguaje_sis,s.provedor_sistema, s.servidor_id_servidor, s.usuario_id_usuario,s.activo, sr.nom_servidor, u.nombre_us, u.apaterno_us FROM sisapp s JOIN servidor sr ON(s.servidor_id_servidor = sr.id_servidor)  JOIN usuario u ON(s.usuario_id_usuario = u.id_usuario) where id_sistemas = ?";
         
         try {
             ps = con.prepareStatement(sql); 
@@ -126,6 +131,9 @@ public class SisAppMVC extends ConexionBD{
                 sisapp.setServidor_id(rs.getInt("servidor_id_servidor"));
                 sisapp.setUsuario_id(rs.getInt("usuario_id_usuario"));    
                 sisapp.setActivo(rs.getString("activo").charAt(0)); 
+                sisapp.setNom_servidor(rs.getString("nom_servidor"));
+                sisapp.setNombre_us(rs.getString("nombre_us"));
+                sisapp.setApellido_us(rs.getString("apaterno_us"));
                 return true;
             }else{return false;}
             
@@ -148,12 +156,13 @@ public class SisAppMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "Select id_usuario from usuario";
+            //sql = "Select id_usuario from usuario";
+            sql = "select id_usuario, nombre_us||' '||apaterno_us as nombre from usuario where perfiles_id_perfiles = 3";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_usuario"));
+                cbox_nombre.addItem(rs.getString("id_usuario")+". "+rs.getString("nombre"));
             }
         } catch (SQLException e) {
         }finally{
@@ -171,12 +180,12 @@ public class SisAppMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "Select id_servidor from servidor";
+            sql = "select id_servidor, nom_servidor from servidor";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_servidor"));
+                cbox_nombre.addItem(rs.getString("id_servidor")+". "+rs.getString("nom_servidor"));
             }
         } catch (SQLException e) {
         }finally{

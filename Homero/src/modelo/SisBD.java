@@ -65,4 +65,31 @@ public class SisBD {
     private int servidor_id;
     private int usuario_id;
     private char activo;
+
+    public String getNom_servidor() {
+        return nom_servidor;
+    }
+
+    public void setNom_servidor(String nom_servidor) {
+        this.nom_servidor = nom_servidor;
+    }
+
+    public String getNombre_us() {
+        return nombre_us;
+    }
+
+    public void setNombre_us(String nombre_us) {
+        this.nombre_us = nombre_us;
+    }
+    private String nom_servidor;
+    private String nombre_us;
+
+    public String getApaterno_us() {
+        return apaterno_us;
+    }
+
+    public void setApaterno_us(String apaterno_us) {
+        this.apaterno_us = apaterno_us;
+    }
+    private String apaterno_us;
 }
