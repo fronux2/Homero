@@ -19,14 +19,6 @@ public class Servicio {
         this.nombre_serv = nombre_serv;
     }
 
-    public String getTipo_serv() {
-        return tipo_serv;
-    }
-
-    public void setTipo_serv(String tipo_serv) {
-        this.tipo_serv = tipo_serv;
-    }
-
     public int getSisApp() {
         return SisApp;
     }
@@ -44,12 +36,29 @@ public class Servicio {
     }
     private int id_servicios;
     private String nombre_serv;
-    private String tipo_serv;
+    private int tipo_serv_id;
     private int SisApp;
     private char activo;
+    private String nombre_tipo;
+
+    public String getNombre_tipo() {
+        return nombre_tipo;
+    }
+
+    public void setNombre_tipo(String nombre_tipo) {
+        this.nombre_tipo = nombre_tipo;
+    }
 
     public String getNombre_sis() {
         return nombre_sis;
+    }
+
+    public int getTipo_serv_id() {
+        return tipo_serv_id;
+    }
+
+    public void setTipo_serv_id(int tipo_serv_id) {
+        this.tipo_serv_id = tipo_serv_id;
     }
 
     public void setNombre_sis(String nombre_sis) {

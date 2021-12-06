@@ -56,16 +56,16 @@ public class VistaIndex extends javax.swing.JFrame {
         btnSisBD.setText("jButton1");
 
         jusuarios.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jusuarios.setText("Gestion de Usuarios");
+        jusuarios.setText("Gestión de Usuarios");
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel3.setText("Gestion de Sistemas ");
+        jLabel3.setText("Gestión de Sistemas ");
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel4.setText("Gestion de Base de Datos");
+        jLabel4.setText("Gestión de Base de Datos");
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel5.setText("Gestion de Servicios");
+        jLabel5.setText("Gestión de Servicios");
 
         jPanel1.setForeground(new java.awt.Color(51, 57, 63));
 

@@ -6,7 +6,9 @@
 package vista;
 
 import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import modelo.UsuarioMVC;
 
 /**
  *
@@ -68,16 +70,21 @@ public class VistaUsuario extends javax.swing.JFrame {
         txtActivo = new javax.swing.JTextField();
         lactivo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        cbox_region = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cbox_comuna = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        txtContrasenaVieja = new javax.swing.JTextField();
+        lvieja = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(726, 700));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(700, 650));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 1600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 1700));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel1.setText("Nombre:");
@@ -164,6 +171,11 @@ public class VistaUsuario extends javax.swing.JFrame {
         btnModificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnModificar.setForeground(new java.awt.Color(255, 255, 255));
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,6 +236,29 @@ public class VistaUsuario extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 123, 255));
         jLabel13.setText("Gestión de Usuarios");
 
+        cbox_region.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        cbox_region.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbox_regionItemStateChanged(evt);
+            }
+        });
+        cbox_region.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_regionActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel14.setText("Región:");
+
+        cbox_comuna.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel15.setText("Comuna:");
+
+        lvieja.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lvieja.setText("Contraseña vieja:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -247,22 +282,6 @@ public class VistaUsuario extends javax.swing.JFrame {
                             .addComponent(txtPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(txtAmaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
                         .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
@@ -275,12 +294,6 @@ public class VistaUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
                         .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
@@ -291,9 +304,6 @@ public class VistaUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -324,15 +334,45 @@ public class VistaUsuario extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtDv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbox_region, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbox_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAmaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lvieja, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtContrasenaVieja, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(100, 100, 100)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -370,9 +410,15 @@ public class VistaUsuario extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
-                .addComponent(txtAmaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtAmaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lvieja, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtContrasenaVieja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -383,7 +429,15 @@ public class VistaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(cbox_region, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(cbox_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,11 +457,12 @@ public class VistaUsuario extends javax.swing.JFrame {
                 .addComponent(lactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -416,53 +471,64 @@ public class VistaUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
+    private void btnBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if((c<'0' || c>'9')) evt.consume();
-        if(txtRut.getText().length() >= 8 ){
-         evt.consume();
-         Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_txtRutKeyTyped
-
-    private void txtDvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDvKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if((c<'0' || c>'9') && (c<'k')&& (c<'K')) evt.consume();
-        if(txtDv.getText().length() >= 1 ){
-         evt.consume();
-         Toolkit.getDefaultToolkit().beep();
-        }
-        
         char cTeclaPresionada=evt.getKeyChar();
-        
+
         if(cTeclaPresionada==KeyEvent.VK_ENTER){
             btnBuscar.doClick();
         }
-    }//GEN-LAST:event_txtDvKeyTyped
+    }//GEN-LAST:event_btnBuscarKeyTyped
 
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A') | c>'Z') evt.consume();
-        if(txtNombre.getText().length() >= 30){
+
+        if(txtUsuario.getText().length() >= 30){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_txtNombreKeyTyped
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if(txtContrasena.getText().length() >= 30){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtContrasenaKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(txtTelefono.getText().length() >= 30){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        // TODO add your handling code here:
+        
+        if(txtDireccion.getText().length() >= 30){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
 
     private void txtApaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApaternoKeyTyped
         // TODO add your handling code here:
@@ -474,63 +540,62 @@ public class VistaUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtApaternoKeyTyped
 
-    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();        
-        if(txtTelefono.getText().length() >= 30){
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_txtTelefonoKeyTyped
-
     private void txtAmaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmaternoKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A') | c>'Z') evt.consume();
+        
         if(txtAmaterno.getText().length() >= 30){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtAmaternoKeyTyped
 
-    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if((c<'a' || c>'z') && (c<'A') | c>'Z') evt.consume();
-        if(txtDireccion.getText().length() >= 30){
+        if(txtNombre.getText().length() >= 30){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_txtDireccionKeyTyped
+    }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
-        if(txtUsuario.getText().length() >= 30){
+        if((c<'0' || c>'9')) evt.consume();
+        if(txtRut.getText().length() >= 8 ){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_txtUsuarioKeyTyped
+    }//GEN-LAST:event_txtRutKeyTyped
 
-    private void txtContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyTyped
+    private void txtDvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDvKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
-        if(txtContrasena.getText().length() >= 30){
+        if((c<'0' || c>'9') && (c<'k')&& (c<'K')) evt.consume();
+        if(txtDv.getText().length() >= 1 ){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_txtContrasenaKeyTyped
 
-    private void btnBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyTyped
-        // TODO add your handling code here:
         char cTeclaPresionada=evt.getKeyChar();
-        
+
         if(cTeclaPresionada==KeyEvent.VK_ENTER){
             btnBuscar.doClick();
         }
-    }//GEN-LAST:event_btnBuscarKeyTyped
+    }//GEN-LAST:event_txtDvKeyTyped
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void cbox_regionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_regionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_regionActionPerformed
+
+    private void cbox_regionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbox_regionItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_regionItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -573,30 +638,36 @@ public class VistaUsuario extends javax.swing.JFrame {
     public javax.swing.JButton btnListar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnVolver;
+    public javax.swing.JComboBox<String> cbox_comuna;
     public javax.swing.JComboBox<String> cbox_perfiles;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
+    public javax.swing.JComboBox<String> cbox_region;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
+    public javax.swing.JLabel jLabel11;
+    public javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    public javax.swing.JLabel jLabel14;
+    public javax.swing.JLabel jLabel15;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public com.toedter.calendar.JDateChooser jdFecha;
     public javax.swing.JLabel lactivo;
     public javax.swing.JLabel lfecha;
     public javax.swing.JLabel lperfil;
+    public javax.swing.JLabel lvieja;
     public javax.swing.JTextField txtActivo;
     public javax.swing.JTextField txtAmaterno;
     public javax.swing.JTextField txtApaterno;
     public javax.swing.JTextField txtContrasena;
+    public javax.swing.JTextField txtContrasenaVieja;
     public javax.swing.JTextField txtDireccion;
     public javax.swing.JTextField txtDv;
     public javax.swing.JTextField txtEmail;

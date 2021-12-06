@@ -21,7 +21,7 @@ public class UsuarioMVC extends ConexionBD{
         
         CallableStatement ps = null;
         Connection con = getConexion();                 
-        String sql = "{call sp_agregar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?)}";  
+        String sql = "{call sp_agregar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";  
         try {
             ps = con.prepareCall(sql);
             ps.setString(1, us.getRut_us());
@@ -32,11 +32,13 @@ public class UsuarioMVC extends ConexionBD{
             ps.setString(6, us.getFnaciemiento_us());
             ps.setString(7, us.getTelefono_us());
             ps.setString(8, us.getEmail_us());
-            ps.setString(9, us.getDireccion());
-            ps.setString(10, us.getUsuario());
-            ps.setString(11, us.getContrasena());
-            ps.setInt(12, us.getPerfil_id());
-            ps.setInt(13, 1);
+            ps.setInt(9, us.getId_region());
+            ps.setInt(10, us.getId_comuna());
+            ps.setString(11, us.getDireccion());
+            ps.setString(12, us.getUsuario());
+            ps.setString(13, us.getContrasena());
+            ps.setInt(14, us.getPerfil_id());
+            ps.setInt(15, 1);
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -55,7 +57,7 @@ public class UsuarioMVC extends ConexionBD{
     public boolean modificar(Usuario us){
         PreparedStatement ps = null;
         Connection con = getConexion();        
-        String sql = "UPDATE usuario SET rut_us = ?, dv_us = ?, nombre_us = ?, apaterno_us = ?, amaterno_us = ?,f_nac_us = to_date(?, 'dd/mm/yyyy'), telefono_us = ?, email_us = ?, direccion = ?, usuario = ?, contrasena = ?, perfiles_id_perfiles = ?, activo = ? where rut_us = ? and dv_us = ?";
+        String sql = "UPDATE usuario SET rut_us = ?, dv_us = ?, nombre_us = ?, apaterno_us = ?, amaterno_us = ?,f_nac_us = to_date(?, 'dd/mm/yyyy'), telefono_us = ?, email_us = ?,region_id_region = ?, comuna_id_comuna = ?, direccion = ?, usuario = ?, contrasena = ?, perfiles_id_perfiles = ?, activo = ? where rut_us = ? and dv_us = ?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -67,13 +69,15 @@ public class UsuarioMVC extends ConexionBD{
             ps.setString(6, us.getFnaciemiento_us());
             ps.setString(7, us.getTelefono_us());
             ps.setString(8, us.getEmail_us());
-            ps.setString(9, us.getDireccion());
-            ps.setString(10, us.getUsuario());
-            ps.setString(11, us.getContrasena());
-            ps.setInt(12, us.getPerfil_id());
-            ps.setInt(13, us.getActivo());
-            ps.setString(14, us.getRut_us());
-            ps.setString(15, us.getDv_us());
+            ps.setInt(9, us.getId_region());
+            ps.setInt(10, us.getId_comuna());
+            ps.setString(11, us.getDireccion());
+            ps.setString(12, us.getUsuario());
+            ps.setString(13, us.getContrasena());
+            ps.setInt(14, us.getPerfil_id());
+            ps.setInt(15, us.getActivo());
+            ps.setString(16, us.getRut_us());
+            ps.setString(17, us.getDv_us());
             
             ps.execute();
             return true;
@@ -226,7 +230,13 @@ public class UsuarioMVC extends ConexionBD{
     public ArrayList<Usuario> listar(){
         ArrayList listaProducto = new ArrayList();
         Usuario us;
-        String sql = "SELECT u.id_usuario, u.rut_us, u.dv_us, u.nombre_us, u.apaterno_us, u.amaterno_us, u.f_nac_us, u.telefono_us, u.email_us, u.direccion, u.usuario, u.contrasena, u.perfiles_id_perfiles, p.detalle, u.activo FROM usuario u JOIN perfiles p ON(perfiles_id_perfiles = id_perfiles)";
+        String sql = "SELECT u.id_usuario, u.rut_us, u.dv_us, u.nombre_us, u.apaterno_us,\n" +
+                     "       u.amaterno_us, u.f_nac_us, u.telefono_us, u.email_us,\n" +
+                     "       u.region_id_region,r.nombre,u.comuna_id_comuna,c.nombre, u.direccion, u.usuario,\n" +
+                     "       u.contrasena, u.perfiles_id_perfiles, p.detalle, u.activo\n" +
+                     "       FROM usuario u JOIN perfiles p ON(u.perfiles_id_perfiles = p.id_perfiles)\n" +
+                     "                      JOIN region r ON(u.region_id_region = r.id_region)\n" +
+                     "                      JOIN comuna c ON(u.comuna_id_comuna = c.id_comuna)";
         Connection con = getConexion();
         
         try {            
@@ -245,12 +255,16 @@ public class UsuarioMVC extends ConexionBD{
                 us.setFnaciemiento_us(rs.getString(7));
                 us.setTelefono_us(rs.getString(8));
                 us.setEmail_us(rs.getString(9));
-                us.setDireccion(rs.getString(10));
-                us.setUsuario(rs.getString(11));
-                us.setContrasena(rs.getString(12));
-                us.setPerfil_id(rs.getInt(13));
-                us.setDetalle(rs.getString(14));
-                us.setActivo(rs.getString(15).charAt(0));
+                us.setId_region(rs.getInt(10));
+                us.setRegion(rs.getString(11));
+                us.setId_comuna(rs.getInt(12));
+                us.setComuna(rs.getString(13));
+                us.setDireccion(rs.getString(14));
+                us.setUsuario(rs.getString(15));
+                us.setContrasena(rs.getString(16));
+                us.setPerfil_id(rs.getInt(17));
+                us.setDetalle(rs.getString(18));
+                us.setActivo(rs.getString(19).charAt(0));
                 listaProducto.add(us);
             }
         } catch (Exception e) {
@@ -276,7 +290,82 @@ public class UsuarioMVC extends ConexionBD{
             rs = ps.executeQuery();
             cbox_nombre.addItem("Seleccionar");
             while(rs.next()){
-                cbox_nombre.addItem(rs.getString("id_perfiles")+". "+rs.getString("detalle"));
+                cbox_nombre.addItem(rs.getString("id_perfiles")+"   . "+rs.getString("detalle"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+    
+    public boolean Cargar_combobox_comuna(JComboBox cbox_comuna){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select id_comuna, nombre from comuna ";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_comuna.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_comuna.addItem(rs.getString("id_comuna")+"   . "+rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+    
+    
+    
+    public boolean Cargar_combobox_comuna(JComboBox cbox_comuna, Usuario us){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        
+        try {                        
+            sql = "Select id_comuna, nombre from comuna where region_id_region = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, us.getId_comuna());
+            rs = ps.executeQuery();
+            cbox_comuna.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_comuna.addItem(rs.getString("id_comuna")+"   . "+rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+        }finally{
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+    
+    
+    
+    public boolean Cargar_combobox_region(JComboBox cbox_region){
+        String sql= "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        try {
+            sql = "Select id_region, nombre from region ";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbox_region.addItem("Seleccionar");
+            while(rs.next()){
+                cbox_region.addItem(rs.getString("id_region")+"   . "+rs.getString("nombre"));
             }
         } catch (SQLException e) {
         }finally{

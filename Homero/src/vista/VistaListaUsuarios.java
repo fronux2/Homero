@@ -21,8 +21,8 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
     
     public void Filtro ()
     {
-        int ColumntaTabla = 0;
-        trs.setRowFilter(RowFilter.regexFilter(txtFiltro.getText(), ColumntaTabla));
+        int ColumntaTabla = 1;
+        trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), ColumntaTabla));
         
     }    
     
@@ -129,7 +129,7 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
        txtFiltro.addKeyListener(new KeyAdapter(){
             @Override
             public void keyReleased(final KeyEvent e) {
-                trs.setRowFilter(RowFilter.regexFilter(txtFiltro.getText(), 1));
+                //trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), 1));
                 String cadena = (txtFiltro.getText());
                 txtFiltro.setText(cadena);
                 Filtro();
