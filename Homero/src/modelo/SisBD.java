@@ -26,21 +26,37 @@ public class SisBD {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
-    public String getSoftware_bd() {
-        return Software_bd;
-    }
-
-    public void setSoftware_bd(String Software_bd) {
-        this.Software_bd = Software_bd;
-    }
-
+    
     public int getServidor_id() {
         return servidor_id;
     }
 
     public void setServidor_id(int servidor_id) {
         this.servidor_id = servidor_id;
+    }
+
+    public int getLenguaje_id() {
+        return lenguaje_id;
+    }
+
+    public void setLenguaje_id(int lenguaje_id) {
+        this.lenguaje_id = lenguaje_id;
+    }
+
+    public String getAmaterno_us() {
+        return amaterno_us;
+    }
+
+    public void setAmaterno_us(String amaterno_us) {
+        this.amaterno_us = amaterno_us;
+    }
+
+    public String getNombre_leng() {
+        return nombre_leng;
+    }
+
+    public void setNombre_leng(String nombre_leng) {
+        this.nombre_leng = nombre_leng;
     }
 
     public int getUsuario_id() {
@@ -61,10 +77,24 @@ public class SisBD {
     private int id_bd;
     private String usuario;
     private String contrasena;
-    private String Software_bd;
+    private int lenguaje_id;
     private int servidor_id;
     private int usuario_id;
     private char activo;
+    private String nom_servidor;
+    private String nombre_us;
+    private String apaterno_us;
+    private String amaterno_us;
+    private String nombre_leng;
+    private String nombre_bd;
+
+    public String getNombre_bd() {
+        return nombre_bd;
+    }
+
+    public void setNombre_bd(String nombre_bd) {
+        this.nombre_bd = nombre_bd;
+    }
 
     public String getNom_servidor() {
         return nom_servidor;
@@ -80,9 +110,7 @@ public class SisBD {
 
     public void setNombre_us(String nombre_us) {
         this.nombre_us = nombre_us;
-    }
-    private String nom_servidor;
-    private String nombre_us;
+    }    
 
     public String getApaterno_us() {
         return apaterno_us;
@@ -91,5 +119,5 @@ public class SisBD {
     public void setApaterno_us(String apaterno_us) {
         this.apaterno_us = apaterno_us;
     }
-    private String apaterno_us;
+    
 }

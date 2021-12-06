@@ -11,37 +11,14 @@ public class SisApp {
         this.id_sistemas = id_sistemas;
     }
 
-    public String getSoftware_bd() {
-        return software_bd;
-    }
-
-    public void setSoftware_bd(String software_bd) {
-        this.software_bd = software_bd;
-    }
-
+    
     public String getNombre_sis() {
         return nombre_sis;
     }
 
     public void setNombre_sis(String nombre_sis) {
         this.nombre_sis = nombre_sis;
-    }
-
-    public String getLenguaje_sis() {
-        return lenguaje_sis;
-    }
-
-    public void setLenguaje_sis(String lenguaje_sis) {
-        this.lenguaje_sis = lenguaje_sis;
-    }
-
-    public String getProvedor_sistema() {
-        return provedor_sistema;
-    }
-
-    public void setProvedor_sistema(String provedor_sistema) {
-        this.provedor_sistema = provedor_sistema;
-    }
+    }    
 
     public int getServidor_id() {
         return servidor_id;
@@ -81,26 +58,62 @@ public class SisApp {
     public void setNombre_us(String nombre_us) {
         this.nombre_us = nombre_us;
     }
-    
-    public String getApellido_us() {
-        return apellido_us;
+
+    public String getApellido_paterno() {
+        return apellido_paterno;
     }
 
-    public void setApellido_us(String apellido_us) {
-        this.apellido_us = apellido_us;
+    public void setApellido_paterno(String apellido_paterno) {
+        this.apellido_paterno = apellido_paterno;
+    }
+
+    public String getApellido_materno() {
+        return apellido_materno;
+    }
+
+    public void setApellido_materno(String apellido_materno) {
+        this.apellido_materno = apellido_materno;
     }
     
+      
     private int id_sistemas;
-    private String software_bd;
+    private int id_bd;
     private String nombre_sis;
-    private String lenguaje_sis;
-    private String provedor_sistema;
+    private int id_lenguaje;    
     private int servidor_id;
     private int usuario_id;     
     private char activo;
     private String nom_servidor;
     private String nombre_us;
-    private String apellido_us;
+    private String apellido_paterno;
+    private String apellido_materno;
+    private String nombre_lenguaje;
+    
+
+    public int getId_bd() {
+        return id_bd;
+    }
+
+    public void setId_bd(int id_bd) {
+        this.id_bd = id_bd;
+    }
+
+    public int getId_lenguaje() {
+        return id_lenguaje;
+    }
+
+    public void setId_lenguaje(int id_lenguaje) {
+        this.id_lenguaje = id_lenguaje;
+    }
+
+    public String getNombre_lenguaje() {
+        return nombre_lenguaje;
+    }
+
+    public void setNombre_lenguaje(String nombre_lenguaje) {
+        this.nombre_lenguaje = nombre_lenguaje;
+    }
+    
 
 
     
