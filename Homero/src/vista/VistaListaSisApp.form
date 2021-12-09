@@ -27,11 +27,7 @@
               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
               <Component id="Seleccionar" min="-2" pref="131" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="106" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtListar" min="-2" pref="131" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="648" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -44,12 +40,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnVolver" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtListar" alignment="0" max="32767" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="Seleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnVolver" pref="42" max="32767" attributes="0"/>
+                  <Component id="Seleccionar" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="471" max="32767" attributes="0"/>
@@ -68,19 +60,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolverActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Buscador por ID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtListar">
-      <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtListarKeyTyped"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

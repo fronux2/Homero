@@ -30,22 +30,18 @@ public class VistaSisBD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JTextField();
-        txtActivo = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
-        lservidor = new javax.swing.JLabel();
-        txtEncargado = new javax.swing.JTextField();
-        lencargado = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         lencargado1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtServidor = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         lactivo = new javax.swing.JLabel();
@@ -59,6 +55,9 @@ public class VistaSisBD extends javax.swing.JFrame {
         cbox_lenguaje = new javax.swing.JComboBox<>();
         txtNombreBD = new javax.swing.JTextField();
         lactivo1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,19 +78,9 @@ public class VistaSisBD extends javax.swing.JFrame {
             }
         });
 
-        txtActivo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
         btnModificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnModificar.setForeground(new java.awt.Color(255, 255, 255));
         btnModificar.setText("Modificar");
-
-        lservidor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lservidor.setText("ID Servidor Actual:");
-
-        txtEncargado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
-        lencargado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lencargado.setText("ID Encargado Actual:");
 
         txtUsuario.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -115,8 +104,6 @@ public class VistaSisBD extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setText("ID Encargado:");
-
-        txtServidor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         btnGuardar.setBackground(new java.awt.Color(0, 123, 255));
         btnGuardar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -160,6 +147,38 @@ public class VistaSisBD extends javax.swing.JFrame {
         lactivo1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         lactivo1.setText("Nombre BD:");
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Activo");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Desactivo");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jRadioButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jRadioButton2)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -179,10 +198,8 @@ public class VistaSisBD extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbox_idEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbox_idServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -197,18 +214,17 @@ public class VistaSisBD extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbox_lenguaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lservidor)
-                                    .addComponent(lencargado, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNombreBD, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lactivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(139, Short.MAX_VALUE))
@@ -246,21 +262,14 @@ public class VistaSisBD extends javax.swing.JFrame {
                         .addComponent(cbox_idServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(cbox_idEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lservidor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lencargado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(197, 197, 197)
                         .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(lactivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,8 +316,8 @@ public class VistaSisBD extends javax.swing.JFrame {
 
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A') | c>'Z'&& (c<'0' || c>'9')) evt.consume();
+//        char c = evt.getKeyChar();
+//        if((c<'a' || c>'z') && (c<'A') | c>'Z'&& (c<'0' || c>'9')) evt.consume();
         if(txtUsuario.getText().length() >= 20){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
@@ -317,13 +326,16 @@ public class VistaSisBD extends javax.swing.JFrame {
 
     private void txtContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A') | c>'Z'&& (c<'0' || c>'9')) evt.consume();
+        
         if(txtContrasena.getText().length() >= 20){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtContrasenaKeyTyped
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,6 +378,7 @@ public class VistaSisBD extends javax.swing.JFrame {
     public javax.swing.JButton btnListar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnVolver2;
+    private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JComboBox<String> cbox_idEncargado;
     public javax.swing.JComboBox<String> cbox_idServidor;
     public javax.swing.JComboBox<String> cbox_lenguaje;
@@ -376,18 +389,16 @@ public class VistaSisBD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    public javax.swing.JRadioButton jRadioButton1;
+    public javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lactivo;
     public javax.swing.JLabel lactivo1;
-    public javax.swing.JLabel lencargado;
     public javax.swing.JLabel lencargado1;
-    public javax.swing.JLabel lservidor;
-    public javax.swing.JTextField txtActivo;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtContrasena;
-    public javax.swing.JTextField txtEncargado;
     public javax.swing.JTextField txtNombreBD;
-    public javax.swing.JTextField txtServidor;
     public javax.swing.JTextField txtUsuario;
     public javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables

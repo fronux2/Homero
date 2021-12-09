@@ -19,12 +19,12 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
     DefaultTableModel modeloT = new DefaultTableModel();
     TableRowSorter trs;
     
-    public void Filtro ()
-    {
-        int ColumntaTabla = 1;
-        trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), ColumntaTabla));
-        
-    }    
+//    public void Filtro ()
+//    {
+//        int ColumntaTabla = 1;
+//        trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), ColumntaTabla));
+//        
+//    }    
     
     /**
      * Creates new form VistaListaUsuarios
@@ -45,8 +45,6 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaUsuarios = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
-        txtFiltro = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         Seleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,15 +70,6 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFiltroKeyTyped(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel1.setText("Filtro por ID:");
-
         Seleccionar.setText("Seleccionar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,13 +80,9 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
                 .addComponent(btnVolver)
                 .addGap(206, 206, 206)
                 .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 624, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,10 +90,7 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13))
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
@@ -122,24 +104,6 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
-        
-         // TODO add your handling code here: Agregando filtro
-       txtFiltro.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyReleased(final KeyEvent e) {
-                //trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), 1));
-                String cadena = (txtFiltro.getText());
-                txtFiltro.setText(cadena);
-                Filtro();
-            }
-            
-        });
-        
-        trs = new TableRowSorter(jTablaUsuarios.getModel());
-        jTablaUsuarios.setRowSorter(trs);
-    }//GEN-LAST:event_txtFiltroKeyTyped
 
     /**
      * @param args the command line arguments
@@ -179,9 +143,7 @@ public class VistaListaUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Seleccionar;
     public javax.swing.JButton btnVolver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTablaUsuarios;
-    public javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

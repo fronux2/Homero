@@ -42,7 +42,7 @@ public class SisAppMVC extends ConexionBD{
         SisApp sisapp;
         String sql = "SELECT sa.id_sistemas, sa.sisbd_id_bd, sa.nombre_sis, sa.lenguajes_id_lenguajes,\n" +
                      "le.nombre, sa.servidor_id_servidor, se.nom_servidor, sa.usuario_id_usuario, us.nombre_us,\n" +
-                     "us.apaterno_us, us.amaterno_us, sa.activo\n" +
+                     "us.apaterno_us, us.amaterno_us, sa.activo, sb.nombre_bd\n" +
                      "                            FROM sisapp sa JOIN sisbd sb ON(sa.sisbd_id_bd = sb.id_bd)\n" +
                      "                                           JOIN lenguajes le ON(sa.lenguajes_id_lenguajes = le.id_lenguajes)\n" +
                      "                                           JOIN servidor se ON(sa.servidor_id_servidor = se.id_servidor)\n" +
@@ -69,6 +69,7 @@ public class SisAppMVC extends ConexionBD{
                 sisapp.setApellido_paterno(rs.getString(10));
                 sisapp.setApellido_materno(rs.getString(11));
                 sisapp.setActivo(rs.getString(12).charAt(0));
+                sisapp.setNombre_bd(rs.getString(13));
                 listaProducto.add(sisapp);
             }
         } catch (Exception e) {
@@ -127,7 +128,7 @@ public class SisAppMVC extends ConexionBD{
         Connection con = getConexion();
         String sql = "SELECT sa.id_sistemas, sa.sisbd_id_bd, sa.nombre_sis, sa.lenguajes_id_lenguajes,\n" +
                      "le.nombre, sa.servidor_id_servidor, se.nom_servidor, sa.usuario_id_usuario, us.nombre_us,\n" +
-                     "us.apaterno_us, us.amaterno_us, sa.activo\n" +
+                     "us.apaterno_us, us.amaterno_us, sa.activo, sb.nombre_bd\n" +
                      "                            FROM sisapp sa JOIN sisbd sb ON(sa.sisbd_id_bd = sb.id_bd)\n" +
                      "                                           JOIN lenguajes le ON(sa.lenguajes_id_lenguajes = le.id_lenguajes)\n" +
                      "                                           JOIN servidor se ON(sa.servidor_id_servidor = se.id_servidor)\n" +
@@ -152,7 +153,7 @@ public class SisAppMVC extends ConexionBD{
                 sisapp.setApellido_paterno(rs.getString("apaterno_us"));
                 sisapp.setApellido_materno(rs.getString("amaterno_us"));
                 sisapp.setActivo(rs.getString("activo").charAt(0)); 
-                
+                sisapp.setNombre_bd(rs.getString("nombre_bd")); 
                 return true;
             }else{return false;}
             
@@ -245,12 +246,12 @@ public class SisAppMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         try {
-            sql = "select id_bd from sisbd";
+            sql = "select id_bd, nombre_bd from sisbd";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             cbox_BD.addItem("Seleccionar");
             while(rs.next()){
-                cbox_BD.addItem(rs.getString("id_bd")+"   . "+"name");
+                cbox_BD.addItem(rs.getString("id_bd")+"   . "+rs.getString("nombre_bd"));
             }
         } catch (SQLException e) {
         }finally{

@@ -23,12 +23,12 @@ public class VistaListaSisApp extends javax.swing.JFrame {
     DefaultTableModel modeloT = new DefaultTableModel();
     TableRowSorter trs;
     
-    public void Filtro ()
-    {
-        int ColumntaTabla = 0;
-        trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), ColumntaTabla));
-        
-    } 
+//    public void Filtro ()
+//    {
+//        int ColumntaTabla = 0;
+//        trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), ColumntaTabla));
+//
+//    } 
     public VistaListaSisApp() {
         initComponents();
     }
@@ -43,8 +43,6 @@ public class VistaListaSisApp extends javax.swing.JFrame {
     private void initComponents() {
 
         btnVolver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtListar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaSisApp = new javax.swing.JTable();
         Seleccionar = new javax.swing.JButton();
@@ -56,14 +54,6 @@ public class VistaListaSisApp extends javax.swing.JFrame {
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Buscador por ID:");
-
-        txtListar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtListarKeyTyped(evt);
             }
         });
 
@@ -90,11 +80,7 @@ public class VistaListaSisApp extends javax.swing.JFrame {
                 .addComponent(btnVolver)
                 .addGap(161, 161, 161)
                 .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtListar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 648, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1282, Short.MAX_VALUE)
@@ -104,11 +90,8 @@ public class VistaListaSisApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtListar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Seleccionar)))
+                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(Seleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
                 .addContainerGap())
@@ -120,23 +103,6 @@ public class VistaListaSisApp extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void txtListarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListarKeyTyped
-        // TODO add your handling code here:
-        txtListar.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyReleased(final KeyEvent e) {
-                trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), 1));
-                String cadena = (txtListar.getText());
-                txtListar.setText(cadena);
-                Filtro();
-            }
-            
-        });
-        
-        trs = new TableRowSorter(jTablaSisApp.getModel());
-        jTablaSisApp.setRowSorter(trs);
-    }//GEN-LAST:event_txtListarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -176,9 +142,7 @@ public class VistaListaSisApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Seleccionar;
     public javax.swing.JButton btnVolver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTablaSisApp;
-    public javax.swing.JTextField txtListar;
     // End of variables declaration//GEN-END:variables
 }
