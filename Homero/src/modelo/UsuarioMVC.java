@@ -122,7 +122,13 @@ public class UsuarioMVC extends ConexionBD{
         ResultSet rs = null;
         Connection con = getConexion();
         //String sql = "select * from usuario where rut_us = ? and dv_us = ?";
-        String sql = "SELECT u.id_usuario, u.rut_us, u.dv_us, u.nombre_us, u.apaterno_us, u.amaterno_us, u.f_nac_us, u.telefono_us, u.email_us, u.direccion, u.usuario, u.contrasena, u.perfiles_id_perfiles, p.detalle, u.activo FROM usuario u JOIN perfiles p ON(perfiles_id_perfiles = id_perfiles) where rut_us = ? and dv_us = ?";
+        String sql = "SELECT u.id_usuario, u.rut_us, u.dv_us, u.nombre_us, u.apaterno_us, u.amaterno_us,\n" +
+                     "       u.f_nac_us, u.telefono_us, u.email_us, u.region_id_region,r.nombre as region,u.comuna_id_comuna,c.nombre as comuna,u.direccion, u.usuario, u.contrasena,\n" +
+                     "       u.perfiles_id_perfiles, p.detalle, u.activo\n" +
+                     "       FROM usuario u JOIN perfiles p ON(perfiles_id_perfiles = id_perfiles)\n" +
+                     "                      JOIN region r ON(u.region_id_region = r.id_region)\n" +
+                     "                      JOIN comuna c ON(u.comuna_id_comuna = c.id_comuna)\n" +
+                     "       WHERE rut_us = ? and dv_us = ?";
         
         try {
             ps = con.prepareStatement(sql); 
@@ -141,6 +147,12 @@ public class UsuarioMVC extends ConexionBD{
                 us.setTelefono_us(rs.getString("telefono_us"));
                 us.setEmail_us(rs.getString("email_us"));
                 us.setDireccion(rs.getString("direccion"));
+                us.setId_region(rs.getInt("region_id_region"));
+                System.out.println(us.getId_region());
+                us.setRegion(rs.getString("region"));
+                us.setId_comuna(rs.getInt("comuna_id_comuna"));
+                System.out.println(us.getId_comuna());
+                us.setComuna(rs.getString("comuna"));
                 us.setUsuario(rs.getString("usuario"));
                 us.setContrasena(rs.getString("contrasena"));
                 us.setPerfil_id(rs.getInt("perfiles_id_perfiles"));

@@ -78,6 +78,7 @@ public class SisApp {
       
     private int id_sistemas;
     private int id_bd;
+    private String nombre_bd;    
     private String nombre_sis;
     private int id_lenguaje;    
     private int servidor_id;
@@ -90,6 +91,13 @@ public class SisApp {
     private String nombre_lenguaje;
     
 
+    public String getNombre_bd() {
+        return nombre_bd;
+    }
+
+    public void setNombre_bd(String nombre_bd) {
+        this.nombre_bd = nombre_bd;
+    }
     public int getId_bd() {
         return id_bd;
     }

@@ -109,9 +109,7 @@ public class CtrlHomero implements ActionListener {
         this.vlsisapp.Seleccionar.addActionListener(this);
         this.vlsisbd.Seleccionar.addActionListener(this);
         this.vlser.Seleccionar.addActionListener(this);
-        this.vin.Salir.addActionListener(this);
-        this.vlser.modificar.addActionListener(this);
-        this.vlser.actualizar.addActionListener(this);
+        this.vin.Salir.addActionListener(this);        
         this.vus.cbox_region.addActionListener(this);
         this.vus.cbox_comuna.addActionListener(this);
         this.vus.txtContrasenaVieja.addActionListener(this);
@@ -167,7 +165,9 @@ public class CtrlHomero implements ActionListener {
         LlenarTablaSer(vlser.jTablaServicio);
         LlenarTablaSisApp(vlsisapp.jTablaSisApp);
         vus.txtContrasenaVieja.setVisible(false);
-        vus.lvieja.setVisible(false);
+        
+        vsisapp.txtidsis.setVisible(false);
+        vsisbd.txtid.setVisible(false);
 
     }
 
@@ -192,13 +192,18 @@ public class CtrlHomero implements ActionListener {
         vus.txtContrasena.setText(null);
         //vus.txtIdPerfil.setText(null);
         vus.cbox_perfiles.removeAllItems();
+        vus.cbox_region.removeAllItems();
+        vus.cbox_comuna.removeAllItems();
         
+        vus.jRadioButton1.setSelected(false);
+        vus.jRadioButton2.setSelected(false);
         
-        vus.txtActivo.setText(null);
     }
 
     
     public void limpiarServicio() {
+        vser.jRadioButton1.setSelected(false);
+        vser.jRadioButton2.setSelected(false);
         vser.cbox_idSistemaApp.removeAllItems();
         vser.txtNombre.setText(null);
         vser.cbox_tipo_serv.removeAllItems();
@@ -207,7 +212,8 @@ public class CtrlHomero implements ActionListener {
     }
 
     public void limpiarSisApp() {
-        vsisapp.txtActivo.setText(null);
+        vsisapp.jRadioButton1.setSelected(false);
+        vsisapp.jRadioButton2.setSelected(false);
         vsisapp.txtBuscar.setText(null);
         vsisapp.cbox_idEncargado.removeAllItems();
         vsisapp.cbox_idServidor.removeAllItems();
@@ -218,14 +224,19 @@ public class CtrlHomero implements ActionListener {
     }
 
     public void limpiarBD() {
-        vsisapp.txtActivo.setText(null);
+        
+        vsisbd.jRadioButton1.setSelected(false);
+        vsisbd.jRadioButton2.setSelected(false);
+        //vsisbd.jRadioButton2.setText(null);
         vsisbd.txtUsuario.setText(null);
         vsisbd.txtContrasena.setText(null);
         //vsisbd.txtSBD.setText(null);
-        vsisbd.txtActivo.setText(null);
+        
         vsisbd.cbox_idEncargado.removeAllItems();
         vsisbd.cbox_idServidor.removeAllItems();
+        vsisbd.cbox_lenguaje.removeAllItems();
         vsisbd.txtBuscar.setText(null);
+        vsisbd.txtNombreBD.setText(null);
     }
 
     //llenar columnas jtable Listar Usuarios
@@ -316,7 +327,7 @@ public class CtrlHomero implements ActionListener {
 
         for (int i = 0; i < numRegistros; i++) {
             columna[0] = sisappmvc.listar().get(i).getId_sistemas();
-            columna[1] = sisappmvc.listar().get(i).getId_bd()+"   . "+"name";
+            columna[1] = sisappmvc.listar().get(i).getId_bd()+"   . "+sisappmvc.listar().get(i).getNombre_bd();
             columna[2] = sisappmvc.listar().get(i).getNombre_sis();
             columna[3] = sisappmvc.listar().get(i).getId_lenguaje() +"   . "+ sisappmvc.listar().get(i).getNombre_lenguaje();            
             columna[4] = sisappmvc.listar().get(i).getServidor_id() + "   . " + sisappmvc.listar().get(i).getNom_servidor();
@@ -380,8 +391,8 @@ public class CtrlHomero implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //Acciones Vista Index
-
         if (e.getSource() == vin.btnUsuarios) {
+            
             vin.setVisible(false);
             vus.setTitle("Vista Usuario");
             vus.setLocationRelativeTo(null);
@@ -390,24 +401,20 @@ public class CtrlHomero implements ActionListener {
             usmvc.Cargar_combobox_region(vus.cbox_region);
             usmvc.Cargar_combobox_comuna(vus.cbox_comuna);            
             vus.txtFecha.setVisible(false);
-            vus.lfecha.setVisible(false);
-            vus.txtPerfil.setVisible(false);
-            vus.lperfil.setVisible(false);
-            vus.txtActivo.setVisible(false);
+            vus.lfecha.setVisible(false);            
+            
+            vus.jRadioButton1.setVisible(false);
+            vus.jRadioButton2.setVisible(false);
             vus.lactivo.setVisible(false);
             vus.btnModificar.setVisible(false);
             vus.btnGuardar.setVisible(true);
-
-            String a = "01/01/1975";
-            Date w = new Date(Date.parse(a));
-            String b = "01/01/2021";
-            Date z = new Date(Date.parse(b));
-
-            String de = LocalDate.now().toString();
+            vus.txtContrasenaVieja.setVisible(false);
+            String fechaInicioDate = "01/01/1975";
+            Date w = new Date(Date.parse(fechaInicioDate));
+            String fechaTerminoDate = "01/01/2021";
+            Date z = new Date(Date.parse(fechaTerminoDate));            
             vus.jdFecha.setSelectableDateRange(w, z);
-            System.out.println(de);
-            System.out.println(w);
-            System.out.println(z);
+            
 
         }
 
@@ -418,25 +425,26 @@ public class CtrlHomero implements ActionListener {
             vsisapp.setTitle("Vista Sistema Aplicaciones");
             vsisapp.setLocationRelativeTo(null);
             vsisapp.setVisible(true);
-            vsisapp.txtActivo.setVisible(false);
+            
             vsisapp.btnModificar.setVisible(false);
             sisappmvc.Cargar_comboboxServidorId(vsisapp.cbox_idServidor);
             sisappmvc.Cargar_comboboxIdUsuario(vsisapp.cbox_idEncargado);
             sisappmvc.Cargar_comboboxBD(vsisapp.cbox_idBD);
             sisappmvc.Cargar_comboboxLenguaje(vsisapp.cbox_idlenguaje);
-            vsisapp.txtActivo.setVisible(false);
             
+            vsisapp.jRadioButton1.setVisible(false);
+            vsisapp.jRadioButton2.setVisible(false);
+            vsisapp.lactivo.setVisible(false);
+            vsisapp.txtidsis.setVisible(false);
             
         }
         
                
         if (e.getSource() == vin.btnSisBD) {
-            vsisbd.lencargado.setVisible(false);
-            vsisbd.lservidor.setVisible(false);
-            vsisbd.txtEncargado.setVisible(false);
-            vsisbd.txtServidor.setVisible(false);
             vsisbd.lactivo.setVisible(false);
-            vsisbd.txtActivo.setVisible(false);
+            
+            vsisbd.jRadioButton1.setVisible(false);
+            vsisbd.jRadioButton2.setVisible(false);
             vsisbd.btnModificar.setVisible(false);
             vsisbd.btnGuardar.setVisible(true);
             vin.setVisible(false);
@@ -452,7 +460,9 @@ public class CtrlHomero implements ActionListener {
             vser.lactivo.setVisible(false);
             vser.laplicacion.setVisible(false);
             vser.txtAplicacion.setVisible(false);
-            vser.txtActivo.setVisible(false);
+            
+            vser.jRadioButton1.setVisible(false);
+            vser.jRadioButton2.setVisible(false);
             vser.txtAplicacion.setVisible(false);
             vser.btnModificar.setVisible(false);
             vin.setVisible(false);
@@ -492,6 +502,9 @@ public class CtrlHomero implements ActionListener {
         }
         //Acciones Vista Servicio
         if (e.getSource() == vser.btnVolver) {
+            vser.btnGuardar.setVisible(true);
+            vser.btnModificar.setVisible(false);
+            vser.btnListar.setVisible(true);
             vser.setVisible(false);
             volver();
             limpiarServicio();
@@ -601,6 +614,8 @@ public class CtrlHomero implements ActionListener {
                     limpiarSisApp();
                     sisappmvc.Cargar_comboboxServidorId(vsisapp.cbox_idServidor);
                     sisappmvc.Cargar_comboboxIdUsuario(vsisapp.cbox_idEncargado);
+                    sisappmvc.Cargar_comboboxBD(vsisapp.cbox_idBD);
+                    sisappmvc.Cargar_comboboxLenguaje(vsisapp.cbox_idlenguaje);
                     LlenarTablaSisApp(vlsisapp.jTablaSisApp);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
                 } else {
@@ -641,6 +656,7 @@ public class CtrlHomero implements ActionListener {
                     limpiarBD();
                     sisbdmvc.Cargar_comboboxServidorId(vsisbd.cbox_idServidor);
                     sisbdmvc.Cargar_comboboxIdUsuario(vsisbd.cbox_idEncargado);
+                    sisbdmvc.Cargar_comboboxLenguaje(vsisbd.cbox_lenguaje);
                     LlenarTablaSisBD(vlsisbd.jTablaBD);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
 
@@ -701,6 +717,9 @@ public class CtrlHomero implements ActionListener {
                             if (usmvc.registrar(us)) {
                                 limpiarUsuario();
                                 usmvc.Cargar_combobox(vus.cbox_perfiles);
+                                usmvc.Cargar_combobox_region(vus.cbox_region);
+                                usmvc.Cargar_combobox_comuna(vus.cbox_region);
+                                
                                 LlenarTabla(vlus.jTablaUsuarios);
                                 JOptionPane.showMessageDialog(null, "Registro Guardado");
 
@@ -742,6 +761,7 @@ public class CtrlHomero implements ActionListener {
                 if (sermvc.registrar(ser)) {
                     limpiarServicio();
                     sermvc.Cargar_combobox(vser.cbox_idSistemaApp);
+                    sermvc.Cargar_combobox_servicio(vser.cbox_tipo_serv);
                     LlenarTablaSer(vlser.jTablaServicio);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
 
@@ -842,29 +862,31 @@ public class CtrlHomero implements ActionListener {
             }
                       
             
-            us.setActivo((char) Integer.parseInt(vus.txtActivo.getText()));            
-            if (vus.cbox_perfiles.getSelectedIndex() == 0) {
-                us.setPerfil_id(Integer.parseInt(vus.txtPerfil.getText()));
-            } else {
-                String cbox_perfil = (String) vus.cbox_perfiles.getSelectedItem();               
-                String idperfil = cbox_perfil.substring(0, 3);
-                int parseIdperfil = parseInt(idperfil.replaceAll("\\s", ""));  
-                us.setPerfil_id(parseIdperfil);
+              
+            if(vus.jRadioButton1.isSelected()){
+                String activo = "1"; 
+                us.setActivo((char) Integer.parseInt(activo));
             }
+            if(vus.jRadioButton2.isSelected()){
+                String activo = "0"; 
+                us.setActivo((char) Integer.parseInt(activo));
+            }
+            String cbox_perfil = (String) vus.cbox_perfiles.getSelectedItem();               
+            String idperfil = cbox_perfil.substring(0, 3);
+            int parseIdperfil = parseInt(idperfil.replaceAll("\\s", ""));  
+            us.setPerfil_id(parseIdperfil);
             if (usmvc.modificar(us)) {
                 limpiarUsuario();
                 vus.txtFecha.setVisible(false);
-                vus.lfecha.setVisible(false);
-                vus.txtPerfil.setVisible(false);
-                vus.lperfil.setVisible(false);
+                vus.lfecha.setVisible(false);                
                 vus.lactivo.setVisible(false);
-                vus.txtActivo.setVisible(false);
+                
+                vus.jRadioButton1.setVisible(false);
+                vus.jRadioButton2.setVisible(false);
                 usmvc.Cargar_combobox(vus.cbox_perfiles);
                 LlenarTabla(vlus.jTablaUsuarios);
                 vus.btnModificar.setVisible(false);
-                vus.btnGuardar.setVisible(true);
-                vus.cbox_region.removeAllItems();
-                vus.cbox_comuna.removeAllItems();
+                vus.btnGuardar.setVisible(true);                
                 usmvc.Cargar_combobox_region(vus.cbox_region);
                 usmvc.Cargar_combobox_comuna(vus.cbox_comuna);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
@@ -877,14 +899,12 @@ public class CtrlHomero implements ActionListener {
 
         if (e.getSource() == vsisapp.btnModificar) {
 
-            vsisapp.txtActivo.setVisible(false);
+            
             vsisapp.setVisible(false);
             vsisapp.setTitle("Vista Sistema Aplicacion");
             vsisapp.setLocationRelativeTo(null);
             vsisapp.setVisible(true);
-
-            vsisapp.txtActivo.setVisible(true);
-            
+                      
             vsisapp.lactivo.setVisible(true);
             
                        
@@ -914,16 +934,29 @@ public class CtrlHomero implements ActionListener {
             
             sisapp.setId_sistemas(Integer.parseInt(vsisapp.txtidsis.getText())); 
             
-            sisapp.setActivo((char) Integer.parseInt(vsisapp.txtActivo.getText()));
+            
+            
+            if(vsisapp.jRadioButton1.isSelected()){
+                String activo = "1"; 
+                sisapp.setActivo((char) Integer.parseInt(activo));
+            }
+            if(vsisapp.jRadioButton2.isSelected()){
+                String activo = "0"; 
+                sisapp.setActivo((char) Integer.parseInt(activo));
+            }
             System.out.println("activo?: "+sisapp.getActivo());
             if (sisappmvc.modificar(sisapp)) {
                 limpiarSisApp();
                 vsisapp.lactivo.setVisible(false);
-                vsisapp.txtActivo.setVisible(false);
+                
+                vsisapp.jRadioButton1.setVisible(false);
+                vsisapp.jRadioButton2.setVisible(false);
                 vsisapp.btnModificar.setVisible(false);
                 vsisapp.btnGuardar.setVisible(true);
                 sisappmvc.Cargar_comboboxServidorId(vsisapp.cbox_idServidor);
                 sisappmvc.Cargar_comboboxIdUsuario(vsisapp.cbox_idEncargado);
+                sisappmvc.Cargar_comboboxLenguaje(vsisapp.cbox_idlenguaje);
+                sisappmvc.Cargar_comboboxBD(vsisapp.cbox_idBD);
                 LlenarTablaSisApp(vlsisapp.jTablaSisApp);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             } else {
@@ -934,7 +967,7 @@ public class CtrlHomero implements ActionListener {
         }
 
         if (e.getSource() == vsisbd.btnModificar) {
-            vsisbd.txtActivo.setVisible(false);
+            //vsisbd.txtActivo.setVisible(false);
             vsisbd.setVisible(false);
             vsisbd.setTitle("Vista Sistema BD");
             vsisbd.setLocationRelativeTo(null);
@@ -962,21 +995,29 @@ public class CtrlHomero implements ActionListener {
             sisbd.setUsuario_id(parseIdencargado);
             
             System.out.println("user "+parseIdencargado);
-            sisbd.setActivo((char) Integer.parseInt(vsisbd.txtActivo.getText()));
-            System.out.println("activo?: "+sisbd.getActivo());
+            
+            if(vsisbd.jRadioButton1.isSelected()){
+                String activo = "1"; 
+                sisbd.setActivo((char) Integer.parseInt(activo));
+            }
+            if(vsisbd.jRadioButton2.isSelected()){
+                String activo = "0"; 
+                sisbd.setActivo((char) Integer.parseInt(activo));
+            }
+            
             sisbd.setNombre_bd(vsisbd.txtNombreBD.getText());
             sisbd.setId_bd(Integer.parseInt(vsisbd.txtid.getText()));
             
             if (sisbdmvc.modificar(sisbd)) {
                 limpiarBD();
-                vsisbd.lencargado.setVisible(false);
-                vsisbd.lservidor.setVisible(false);
-                vsisbd.txtEncargado.setVisible(false);
-                vsisbd.txtServidor.setVisible(false);
                 vsisbd.lactivo.setVisible(false);
-                vsisbd.txtActivo.setVisible(false);
+                
+                
+                vsisbd.jRadioButton1.setVisible(false);
+                vsisbd.jRadioButton2.setVisible(false);
                 sisbdmvc.Cargar_comboboxServidorId(vsisbd.cbox_idServidor);
                 sisbdmvc.Cargar_comboboxIdUsuario(vsisbd.cbox_idEncargado);
+                sisbdmvc.Cargar_comboboxLenguaje(vsisbd.cbox_lenguaje);
                 vsisbd.btnModificar.setVisible(false);
                 vsisbd.btnGuardar.setVisible(true);
                 LlenarTablaSisBD(vlsisbd.jTablaBD);
@@ -996,7 +1037,9 @@ public class CtrlHomero implements ActionListener {
             vser.setLocationRelativeTo(null);
             vser.setVisible(true);
             vser.lactivo.setVisible(false);
-            vser.txtActivo.setVisible(false);
+            
+            vser.jRadioButton1.setVisible(false);
+            vser.jRadioButton2.setVisible(false);
             vser.laplicacion.setVisible(false);            
             ser.setId_servicios(Integer.parseInt(vser.txtid.getText())); 
             ser.setNombre_serv(vser.txtNombre.getText());
@@ -1009,12 +1052,20 @@ public class CtrlHomero implements ActionListener {
             String idapp = cbox_id_app.substring(0, 3);
             int parseIdapp = parseInt(idapp.replaceAll("\\s", ""));  
             ser.setSisApp(parseIdapp);                 
-            
-            ser.setActivo((char) Integer.parseInt(vser.txtActivo.getText()));
+            if(vser.jRadioButton1.isSelected()){
+                String activo = "1"; 
+                ser.setActivo((char) Integer.parseInt(activo));
+            }
+            if(vser.jRadioButton2.isSelected()){
+                String activo = "0"; 
+                ser.setActivo((char) Integer.parseInt(activo));
+            }
+            //ser.setActivo((char) Integer.parseInt(vser.txtActivo.getText()));
 
             if (sermvc.modificar(ser)) {
                 limpiarServicio();
                 sermvc.Cargar_combobox(vser.cbox_idSistemaApp);
+                sermvc.Cargar_combobox_servicio(vser.cbox_tipo_serv);
                 LlenarTablaSer(vlser.jTablaServicio);
                 vser.btnGuardar.setVisible(true);
                 vser.btnModificar.setVisible(false);
@@ -1025,40 +1076,52 @@ public class CtrlHomero implements ActionListener {
 
             }
         }
-
+        //ACCION BOTONES BUSCAR
         if (e.getSource() == vus.btnBuscar) {
             us.setRut_us(vus.txtRut.getText());
             us.setDv_us(vus.txtDv.getText());
-            vus.txtFecha.setVisible(true);
-            vus.lfecha.setVisible(false);
-            vus.txtFecha.setVisible(false);
-            vus.txtPerfil.setVisible(true);
-            vus.lactivo.setVisible(true);
-            vus.txtActivo.setVisible(true);
-            vus.lperfil.setVisible(false);
-            vus.txtFecha.setEnabled(false);
-            vus.txtPerfil.setVisible(false);
-            vus.btnGuardar.setVisible(false);
-            vus.btnModificar.setVisible(true);
+            
             if (usmvc.buscar(us)) {
+                int idcomuna = us.getId_comuna();
                 vus.txtRut.setText(String.valueOf(us.getRut_us()));
                 vus.txtDv.setText(String.valueOf(us.getDv_us()));
                 vus.txtNombre.setText(String.valueOf(us.getNombre_us()));
                 vus.txtApaterno.setText(String.valueOf(us.getApaterno_us()));
                 vus.txtAmaterno.setText(String.valueOf(us.getAmaterno_us()));
-
                 String fechaa = us.getFnaciemiento_us().substring(0, 10);
                 vus.jdFecha.setDate(Date.valueOf(fechaa));
                 vus.txtTelefono.setText(String.valueOf(us.getTelefono_us()));
                 vus.txtEmail.setText(String.valueOf(us.getEmail_us()));
+                String regionn = (String.valueOf(us.getId_region()) + "   . " + String.valueOf(us.getRegion()));
+                vus.cbox_region.setSelectedItem(regionn);
+                String comunaa = (String.valueOf(idcomuna) + "   . " + String.valueOf(us.getComuna()));
+                vus.cbox_comuna.setSelectedItem(comunaa);
+                
                 vus.txtDireccion.setText(String.valueOf(us.getDireccion()));
                 vus.txtUsuario.setText(String.valueOf(us.getUsuario()));
                 
                 vus.txtContrasena.setText(us.getContrasena());
-                String perfill = (String.valueOf(us.getPerfil_id()) + ". " + String.valueOf(us.getDetalle()));
+                String perfill = (String.valueOf(us.getPerfil_id()) + "   . " + String.valueOf(us.getDetalle()));
                 vus.cbox_perfiles.setSelectedItem(perfill);
-                vus.txtActivo.setText(String.valueOf(us.getActivo()));
-                System.out.println("Activo ?: " + us.getActivo());
+                if(String.valueOf(us.getActivo()).equals("1")){
+                    vus.jRadioButton1.setSelected(true);
+                }
+                if(String.valueOf(us.getActivo()).equals("0")){
+                    vus.jRadioButton2.setSelected(true);
+                }
+                vus.txtFecha.setVisible(true);
+                vus.lfecha.setVisible(false);
+                vus.txtFecha.setVisible(false);
+                
+                vus.lactivo.setVisible(true);
+                vus.jRadioButton1.setVisible(true);
+                vus.jRadioButton2.setVisible(true);
+                
+                vus.txtFecha.setEnabled(false);
+                
+                vus.btnGuardar.setVisible(false);
+                vus.btnModificar.setVisible(true);
+                
 
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro registro usuario");
@@ -1067,20 +1130,18 @@ public class CtrlHomero implements ActionListener {
 
         if (e.getSource() == vsisapp.btnBuscar) {
 
-            vsisapp.btnModificar.setVisible(true);
-            vsisapp.lactivo.setVisible(true);
-            vsisapp.txtActivo.setVisible(true);
+            
             vsisapp.setVisible(false);
             vsisapp.setTitle("Vista Sistema Aplicacion");
             vsisapp.setLocationRelativeTo(null);
             vsisapp.setVisible(true);
             //vsisapp.txtid.setVisible(true);
-            vsisapp.btnGuardar.setVisible(false);
+            
             sisapp.setId_sistemas(Integer.parseInt(vsisapp.txtBuscar.getText()));
             if (sisappmvc.buscar(sisapp)) {
                 
                 
-                String bdd = (String.valueOf(sisapp.getId_bd())+"   . "+"name");
+                String bdd = (String.valueOf(sisapp.getId_bd())+"   . "+sisapp.getNombre_bd());
                 vsisapp.cbox_idBD.setSelectedItem(bdd);
                   
                 vsisapp.txtNSis.setText(String.valueOf(sisapp.getNombre_sis()));
@@ -1092,29 +1153,31 @@ public class CtrlHomero implements ActionListener {
                 String servidorr = (String.valueOf(sisapp.getServidor_id()) + "   . " + String.valueOf(sisapp.getNom_servidor()));
                 vsisapp.cbox_idServidor.setSelectedItem(servidorr);
                 
+                if(String.valueOf(sisapp.getActivo()).equals("1")){
+                    vsisapp.jRadioButton1.setSelected(true);
+                }
+                if(String.valueOf(sisapp.getActivo()).equals("0")){
+                    vsisapp.jRadioButton2.setSelected(true);
+                }
+                
                 String encargadoo = (String.valueOf(sisapp.getUsuario_id()) + "   . " + String.valueOf(sisapp.getNombre_us()) + " " + String.valueOf(sisapp.getApellido_paterno())+ " " + String.valueOf(sisapp.getApellido_materno()));
                 vsisapp.cbox_idEncargado.setSelectedItem(encargadoo);
-                vsisapp.txtActivo.setText(String.valueOf(sisapp.getActivo()));
+                vsisapp.jRadioButton1.setVisible(true);
+                vsisapp.jRadioButton2.setVisible(true);
                 vsisapp.txtidsis.setText(String.valueOf(sisapp.getId_sistemas()));
+                vsisapp.btnModificar.setVisible(true);
+                vsisapp.btnGuardar.setVisible(false);
+                vsisapp.lactivo.setVisible(true);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro registro Sistema Aplicacion");
             }
         }
 
-        if (e.getSource() == vsisbd.btnBuscar) {
-            vsisbd.lencargado.setVisible(false);
-            vsisbd.lservidor.setVisible(false);
-            vsisbd.txtEncargado.setVisible(false);
-            vsisbd.txtServidor.setVisible(false);
-            vsisbd.lactivo.setVisible(true);
-            vsisbd.txtActivo.setVisible(true);
-
-            vsisbd.txtActivo.setVisible(true);
+        if (e.getSource() == vsisbd.btnBuscar) {            
             vsisbd.setVisible(false);
             vsisbd.setTitle("Vista Sistema BD");
-            vsisbd.setLocationRelativeTo(null);
-            vsisbd.btnModificar.setVisible(true);
-            vsisbd.btnGuardar.setVisible(false);
+            vsisbd.setLocationRelativeTo(null);            
             vsisbd.setVisible(true);
             sisbd.setId_bd(Integer.parseInt(vsisbd.txtBuscar.getText()));
             if (sisbdmvc.buscar(sisbd)) {
@@ -1124,19 +1187,28 @@ public class CtrlHomero implements ActionListener {
                 String lenguajee = (String.valueOf(sisbd.getLenguaje_id()) + "   . " + String.valueOf(sisbd.getNombre_leng()));
                 vsisbd.cbox_lenguaje.setSelectedItem(lenguajee);
                 
-                vsisbd.txtServidor.setText(String.valueOf(sisbd.getServidor_id()));
-                vsisbd.txtEncargado.setText(String.valueOf(sisbd.getServidor_id()));
-                vsisbd.txtActivo.setText(String.valueOf(sisbd.getActivo()));
+                if(String.valueOf(sisbd.getActivo()).equals("1")){
+                    vsisbd.jRadioButton1.setSelected(true);
+                }
+                if(String.valueOf(sisbd.getActivo()).equals("0")){
+                    vsisbd.jRadioButton2.setSelected(true);
+                }
+                
 
                 vsisbd.txtid.setText(String.valueOf(sisbd.getId_bd()));
                 String servidorr = (String.valueOf(sisbd.getServidor_id()) + "   . " + String.valueOf(sisbd.getNom_servidor()));
                 vsisbd.cbox_idServidor.setSelectedItem(servidorr);
-                vsisbd.txtEncargado.setText(String.valueOf(sisbd.getUsuario_id()));
+                
                 String encargadoo = (String.valueOf(sisbd.getUsuario_id()) + "   . " + String.valueOf(sisbd.getNombre_us())+ " " + String.valueOf(sisbd.getApaterno_us())+ " " + String.valueOf(sisbd.getAmaterno_us()));
                 vsisbd.cbox_idEncargado.setSelectedItem(encargadoo);
                 vsisbd.txtNombreBD.setText(String.valueOf(sisbd.getNombre_bd()));
-            } else {String servidorr = (String.valueOf(sisbd.getServidor_id()) + "   . " + String.valueOf(sisbd.getNom_servidor()));
-                vsisbd.cbox_idServidor.setSelectedItem(servidorr);
+                vsisbd.lactivo.setVisible(true);
+                vsisbd.jRadioButton1.setVisible(true);
+                vsisbd.jRadioButton2.setVisible(true);
+                
+                vsisbd.btnModificar.setVisible(true);
+                vsisbd.btnGuardar.setVisible(false);
+            } else {
                 JOptionPane.showMessageDialog(null, "No se encontro registro BD");
             }
 
@@ -1144,33 +1216,41 @@ public class CtrlHomero implements ActionListener {
 
         if (e.getSource() == vser.btnBuscar) {
 
-            vser.lactivo.setVisible(true);
-            vser.laplicacion.setVisible(false);
-            vser.txtAplicacion.setVisible(false);
-            vser.txtActivo.setVisible(true);
-            vser.btnGuardar.setVisible(false);
-            vser.btnModificar.setVisible(true);
+            
             vser.setVisible(false);
             vser.setTitle("Vista Sistema Servicio");
             vser.setLocationRelativeTo(null);
             vser.setVisible(true);
-            ser.setId_servicios(Integer.parseInt(vser.txtBuscar.getText()));
-            System.out.println("id:"+ser.getId_servicios());
+            ser.setId_servicios(Integer.parseInt(vser.txtBuscar.getText()));            
             if (sermvc.buscar(ser)) {
                 vser.txtNombre.setText(String.valueOf(ser.getNombre_serv()));                
                 String tipo_servicio = (String.valueOf(ser.getTipo_serv_id()) + "   . " + String.valueOf(ser.getNombre_tipo()));
                 vser.cbox_tipo_serv.setSelectedItem(tipo_servicio);
                 vser.txtAplicacion.setText(String.valueOf(ser.getSisApp()));
-                vser.txtActivo.setText(String.valueOf(ser.getActivo()));
+                if(String.valueOf(ser.getActivo()).equals("1")){
+                    vser.jRadioButton1.setSelected(true);
+                }
+                if(String.valueOf(ser.getActivo()).equals("0")){
+                    vser.jRadioButton2.setSelected(true);
+                }
+                
                 vser.txtid.setText(String.valueOf(ser.getId_servicios()));
-
                 String sistemaa = (String.valueOf(ser.getSisApp()) + "   . " + String.valueOf(ser.getNombre_sis()));
                 vser.cbox_idSistemaApp.setSelectedItem(sistemaa);
+                vser.lactivo.setVisible(true);
+                vser.laplicacion.setVisible(false);
+                vser.txtAplicacion.setVisible(false);
+                vser.jRadioButton1.setVisible(true);
+                vser.jRadioButton2.setVisible(true);                
+                vser.btnGuardar.setVisible(false);
+                vser.btnModificar.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro registro Servicio");
             }
 
         }
+        
+        //ACCION BOTONES SELECCIONAR
 
         if (e.getSource() == vlus.Seleccionar) {
 
@@ -1206,18 +1286,26 @@ public class CtrlHomero implements ActionListener {
             vus.txtAmaterno.setText(amaterno);
             vus.txtFecha.setText(nacimiento);
             vus.txtTelefono.setText(telefono);
-            vus.txtEmail.setText(email);
-            vus.cbox_region.setSelectedItem(region);
-            vus.cbox_comuna.setSelectedItem(comuna);
-                
+            vus.txtEmail.setText(email);                           
             vus.txtDireccion.setText(direccion);
             vus.txtUsuario.setText(usuario);
             vus.txtContrasena.setText(contrasena);
-            vus.txtContrasenaVieja.setText(contrasena);
-            vus.txtPerfil.setText(perfil);
-            vus.txtActivo.setText(activo);
+            vus.txtContrasenaVieja.setText(contrasena); 
+            vus.jRadioButton1.setVisible(true);
+            vus.jRadioButton2.setVisible(true);
+            if(activo.equals("1")){
+                    vus.jRadioButton1.setSelected(true);
+                }
+            if(activo.equals("0")){
+                    vus.jRadioButton2.setSelected(true);
+                }
+            
             usmvc.Cargar_combobox(vus.cbox_perfiles);
+            usmvc.Cargar_combobox_region(vus.cbox_region);
+            usmvc.Cargar_combobox_comuna(vus.cbox_comuna);
             vus.cbox_perfiles.setSelectedItem(perfil);
+            vus.cbox_region.setSelectedItem(region);
+            vus.cbox_comuna.setSelectedItem(comuna); 
             
         }
 
@@ -1237,8 +1325,10 @@ public class CtrlHomero implements ActionListener {
             vsisapp.setVisible(true);
             vsisapp.btnGuardar.setVisible(false);
             vsisapp.lactivo.setVisible(true);
-            vsisapp.txtActivo.setVisible(true);
-            vsisapp.txtActivo.setText(String.valueOf(activo));
+            vsisapp.jRadioButton1.setVisible(true);
+            vsisapp.jRadioButton2.setVisible(true);
+            
+            vsisapp.txtidsis.setText(String.valueOf(id_sistemas));
                       
                       
             sisappmvc.Cargar_comboboxServidorId(vsisapp.cbox_idServidor);
@@ -1250,6 +1340,12 @@ public class CtrlHomero implements ActionListener {
             vsisapp.cbox_idServidor.setSelectedItem(servidor_id_servidor);            
             vsisapp.cbox_idEncargado.setSelectedItem(usuario_id_usuario);
             vsisapp.txtNSis.setText(String.valueOf(nombre_sis));
+            if(activo.equals("1")){
+                    vsisapp.jRadioButton1.setSelected(true);
+                }
+            if(activo.equals("0")){
+                    vsisapp.jRadioButton2.setSelected(true);
+                }
               
             vsisapp.txtid.setText(String.valueOf(id_sistemas));
         }
@@ -1271,8 +1367,8 @@ public class CtrlHomero implements ActionListener {
             vsisbd.setVisible(true);
             vsisbd.btnGuardar.setVisible(false);
             vsisbd.lactivo.setVisible(true);
-            vsisbd.txtActivo.setVisible(true);
-            vsisbd.txtid.setVisible(true);
+            
+            
 
             vsisbd.txtUsuario.setText(String.valueOf(usuario));
             vsisbd.txtContrasena.setText(String.valueOf(contrasena));
@@ -1280,13 +1376,21 @@ public class CtrlHomero implements ActionListener {
 
             sisbdmvc.Cargar_comboboxServidorId(vsisbd.cbox_idServidor);
             sisbdmvc.Cargar_comboboxIdUsuario(vsisbd.cbox_idEncargado);
-            //sisbdmvc.Cargar_comboboxLenguaje(vsisbd.cbox_lenguaje);
+            sisbdmvc.Cargar_comboboxLenguaje(vsisbd.cbox_lenguaje);
             vsisbd.cbox_lenguaje.setSelectedItem(software_bd);
             vsisbd.cbox_idServidor.setSelectedItem(servidor_id_servidor);
             vsisbd.cbox_idEncargado.setSelectedItem(usuario_id_usuario);
             vsisbd.txtid.setText(String.valueOf(id_bd));
-            vsisbd.txtActivo.setText(String.valueOf(activo));
+            vsisbd.jRadioButton1.setVisible(true);
+            vsisbd.jRadioButton2.setVisible(true);
+            if(activo.equals("1")){
+                    vsisbd.jRadioButton1.setSelected(true);
+                }
+            if(activo.equals("0")){
+                    vsisbd.jRadioButton2.setSelected(true);
+                }
             vsisbd.txtNombreBD.setText(String.valueOf(nombre_bd));
+            vsisbd.jRadioButton2.setVisible(true);
         }
 
         
@@ -1305,7 +1409,9 @@ public class CtrlHomero implements ActionListener {
             vser.setVisible(true);
             vser.btnGuardar.setVisible(false);
             vser.lactivo.setVisible(true);
-            vser.txtActivo.setVisible(true);
+            vser.jRadioButton1.setVisible(true);
+            vser.jRadioButton2.setVisible(true);
+            
             vser.txtid.setVisible(false);
 
             vser.txtNombre.setText(String.valueOf(nombre_serv));
@@ -1314,58 +1420,17 @@ public class CtrlHomero implements ActionListener {
             vser.cbox_tipo_serv.setSelectedItem(tipo_serv);  
             vser.cbox_idSistemaApp.setSelectedItem(sisapp_id_sistemas);
             vser.txtAplicacion.setText(String.valueOf(sisapp_id_sistemas));
-
-            vser.txtActivo.setText(String.valueOf(activo));
+            if(activo.equals("1")){
+                    vser.jRadioButton1.setSelected(true);
+                }
+            if(activo.equals("0")){
+                    vser.jRadioButton2.setSelected(true);
+                }
+            
             vser.txtid.setText(String.valueOf(id_servicios));
         }
 
-        if (e.getSource() == vlser.actualizar) {
-            LlenarTablaSer(vlser.jTablaServicio);
-            vlser.setVisible(false);
-            vlser.setVisible(true);
-            JOptionPane.showMessageDialog(null, "Registro Actualizado");
-        }
 
-        if (e.getSource() == vlser.modificar) {
-
-            DefaultTableModel tser = (DefaultTableModel) vlser.jTablaServicio.getModel();
-            String id_servicios = String.valueOf(tser.getValueAt(vlser.jTablaServicio.getSelectedRow(), 0));
-            String nombre_serv = String.valueOf(tser.getValueAt(vlser.jTablaServicio.getSelectedRow(), 1));
-            String tipo_serv = String.valueOf(tser.getValueAt(vlser.jTablaServicio.getSelectedRow(), 2));
-            String sisapp_id_sistemas = String.valueOf(tser.getValueAt(vlser.jTablaServicio.getSelectedRow(), 3));
-            String activo = String.valueOf(tser.getValueAt(vlser.jTablaServicio.getSelectedRow(), 4));
-
-            if (sisapp_id_sistemas.length() < 2) {
-                JOptionPane.showMessageDialog(null, "El tipo de dato ingresado es incorrecto");
-            }
-            if (activo != "1" && activo != "0") {
-                JOptionPane.showMessageDialog(null, "El tipo de dato ingresado es incorrecto0");
-                activo = "1";
-            }
-            
-            String idapp = sisapp_id_sistemas.substring(0, 2);
-            int parseIdserv = parseInt(idapp.replaceAll("\\s", ""));
-            ser.setSisApp(parseIdserv);
-            ser.setActivo((char) Integer.parseInt(activo));
-            ser.setId_servicios((char) Integer.parseInt(id_servicios));
-            ser.setNombre_serv(nombre_serv);
-            
-
-            if (sermvc.modificar(ser)) {
-                limpiarServicio();
-                sermvc.Cargar_combobox(vser.cbox_idSistemaApp);
-                //LlenarTablaSer(vlser.jTablaServicio);
-                JOptionPane.showMessageDialog(null, "Registro Modificado");
-                vlser.setVisible(false);
-                vlser.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "El tipo de dato ingresado es incorrecto");
-
-            }
-
-        }
-        
         if (e.getSource() == vus.cbox_region ){
             if(vus.cbox_region.getSelectedIndex()>0){
                 String cbox_region = (String) vus.cbox_region.getSelectedItem();                
@@ -1381,15 +1446,7 @@ public class CtrlHomero implements ActionListener {
             }
         }
         
-        if (e.getSource() == vus.cbox_comuna ){
-            if(vus.cbox_comuna.getSelectedIndex()>0){
-                String cbox_comuna = (String) vus.cbox_comuna.getSelectedItem();                
-                String idregion = cbox_comuna.substring(0, 3);
-                int parseIdcom = parseInt(idregion.replaceAll("\\s", ""));  
-                us.setId_comuna(parseIdcom);                
-                System.out.println(parseIdcom);
-            }
-        }
+        
     }
     
 }

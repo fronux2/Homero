@@ -24,12 +24,7 @@ public class VistaListaServicio extends javax.swing.JFrame {
     DefaultTableModel modeloT = new DefaultTableModel();
     TableRowSorter trs;
     
-    public void Filtro ()
-    {
-        int ColumntaTabla = 0;
-        trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), ColumntaTabla));
-        
-    } 
+    
     public VistaListaServicio() {
         initComponents();
     }
@@ -44,14 +39,9 @@ public class VistaListaServicio extends javax.swing.JFrame {
     private void initComponents() {
 
         btnVolver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtListar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaServicio = new javax.swing.JTable();
         Seleccionar = new javax.swing.JButton();
-        modificar = new javax.swing.JButton();
-        actualizar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,14 +50,6 @@ public class VistaListaServicio extends javax.swing.JFrame {
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Buscador por ID:");
-
-        txtListar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtListarKeyTyped(evt);
             }
         });
 
@@ -99,61 +81,29 @@ public class VistaListaServicio extends javax.swing.JFrame {
                 }
             });
 
-            modificar.setText("Modificar");
-            modificar.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    modificarKeyTyped(evt);
-                }
-            });
-
-            actualizar.setText("Actualizar Datos");
-            actualizar.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    actualizarKeyTyped(evt);
-                }
-            });
-
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(btnVolver)
-                    .addGap(50, 50, 50)
-                    .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(166, 166, 166)
                     .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(60, 60, 60)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(txtListar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(68, 68, 68)
-                    .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 461, Short.MAX_VALUE))
+                    .addGap(0, 0, Short.MAX_VALUE))
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1282, Short.MAX_VALUE)
                     .addContainerGap())
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(499, 499, 499)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                        .addComponent(txtListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(Seleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(14, 14, 14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(Seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
             );
@@ -165,34 +115,9 @@ public class VistaListaServicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void txtListarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListarKeyTyped
-        // TODO add your handling code here:.
-        txtListar.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyReleased(final KeyEvent e) {
-                trs.setRowFilter(RowFilter.regexFilter(txtListar.getText(), 1));
-                String cadena = (txtListar.getText());
-                txtListar.setText(cadena);
-                Filtro();
-            }
-            
-        });
-        
-        trs = new TableRowSorter(jTablaServicio.getModel());
-        jTablaServicio.setRowSorter(trs);
-    }//GEN-LAST:event_txtListarKeyTyped
-
     private void SeleccionarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SeleccionarKeyTyped
         // TODO add your handling code here:        
     }//GEN-LAST:event_SeleccionarKeyTyped
-
-    private void modificarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modificarKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modificarKeyTyped
-
-    private void actualizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actualizarKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_actualizarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -231,13 +156,8 @@ public class VistaListaServicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Seleccionar;
-    public javax.swing.JButton actualizar;
     public javax.swing.JButton btnVolver;
-    public javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable jTablaServicio;
-    public javax.swing.JButton modificar;
-    public javax.swing.JTextField txtListar;
     // End of variables declaration//GEN-END:variables
 }
